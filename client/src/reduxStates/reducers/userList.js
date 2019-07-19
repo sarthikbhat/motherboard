@@ -3,7 +3,7 @@ import {
 } from '../actions/actionTypes'
 
 const initState = {
-    userList=null
+    userList:null
 }
 
 const defaultReducer = (state = initState, action) => {

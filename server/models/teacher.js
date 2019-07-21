@@ -8,6 +8,7 @@ const TeacherSchema = new Schema({
     },
     yearofjoining:{
         type:Date,
+        required:true,
         default:Date.now()
     },
     classteacher:{

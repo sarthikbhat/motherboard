@@ -17,3 +17,6 @@ exports.mainpage = async (req, res) => {
     type
   });
 };
+exports.connection = async (req, res) => {
+  res.render('mainpage');
+};

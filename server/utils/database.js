@@ -20,4 +20,4 @@ conn.on('connected', function(){
   console.log('Connected to database');
 });
 
-exports.default = conn;
+module.exports = conn;

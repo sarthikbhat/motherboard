@@ -1,5 +1,6 @@
 const  { model, Schema } = require('mongoose');
 const timestamps = require("mongoose-timestamp");
+const db = require('../utils/database');
 
 const UserSchema = new Schema({
     sap_id:{
@@ -38,7 +39,22 @@ const UserSchema = new Schema({
     address:{
         type: String,
         default:null
+    },
+    type:{
+        type:String,
+        required:true
     }
+},{
+    timestamps:true
 });
-UserSchema.plugin(timestamps);
-module.exports = model("User", UserSchema);
+
+let User = db.model('User', UserSchema);
+
+module.exports = {
+    async createUser(user){
+        let newUser = await User.create(user);
+        newUser = await User.findById(newUser._id).lean().exec();
+        console.log(newUser);
+        return newUser;
+    },
+}

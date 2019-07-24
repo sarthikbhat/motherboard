@@ -4,6 +4,19 @@
     position: relative;
     text-align:center;
     overflow:hidden;
+    .menuIconButton{
+        position:absolute;
+        left:2%;
+        top:20%;
+        padding-left:0;
+        padding-right:0;
+        border-radius: 50px;
+        cursor: pointer;
+        display:none;
+        .menuIcon{
+            font-size:32px;
+        }
+    }
     .logoAligner{
         height:100%;
         display:flex;
@@ -19,6 +32,13 @@
             span{
                 color:#1A1A80;
             }
+        }
+    }
+}
+@media(max-width:950px){
+    .Header{
+        .menuIconButton{
+            display:flex;
         }
     }
 }

@@ -1,0 +1,59 @@
+.papers{
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    overflow: auto;
+    padding: 20px;
+    margin: 0px auto;
+    margin-bottom: 0;
+    background: white;
+    width:500px;
+    border-radius: 50px;
+    /* opacity: ; */
+}
+
+.step{
+    border-radius: 5%;
+}
+
+.reset{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    overflow: auto;
+    padding: 20px;
+    margin: 0px auto;
+    margin-bottom: 0;
+    background: white;
+    width:500px;
+    border-radius: 10px;
+    display: none;
+}
+
+.headz{
+    margin: 0;
+    margin-bottom: 10px;
+    font-weight: 500;
+    font-size: 40px;
+    /* flex:1 ; */
+    color: #414195;
+    text-align: center; 
+}
+
+@media (max-width:600px)
+{
+    .papers{
+        /* flex: 1; */
+        width:calc(100% - 30px);
+        /* height: 20px;    */
+        }
+    .headz{
+        font-size: 4vh;
+    }
+
+    .reset{
+        width:calc(100% - 30px);  
+    }
+
+}

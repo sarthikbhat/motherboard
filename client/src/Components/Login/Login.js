@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './Login.scss';
 import { TextField } from '@material-ui/core'
+import Forgot from '../Forgot/forgot';
+import {Link} from 'react-router-dom'
 
 
 const initstate = {
@@ -67,7 +69,7 @@ class Login extends Component {
         return (
             <div className="login">
                 <div className="top"><span className="one" style={{ color: "white" }}>mother</span><span style={{ color: "#414195" }}>Board</span></div>
-                <div className="paper">
+                <div className="papers">
                     <div className="heads">
                         LOGIN
                     </div>
@@ -99,7 +101,7 @@ class Login extends Component {
                             <button className="button" onClick={this.handlesubmit}>
                                 Sign In
                             </button>
-                            <span><h4><a href="/">Forgot Password?</a></h4></span>
+                            <span><h4><Link to="/forgot">Forgot Password?</Link></h4></span>
                         </form>
                     </div>
                 </div>

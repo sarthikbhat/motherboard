@@ -1,27 +1,19 @@
 const jwt=require('jsonwebtoken');
-
+const UserModel = require('../models/user');
 
 
 module.exports = {
     async verify(req, res, next) {
         try {
-          var token = req.headers.authorization.split(" ");
+          var token = req.headers.token
           if (token) {
-
-            jwt.verify(token, "secret", function (err, payload) {
-                console.log(payload)
+            jwt.verify(token, "secret", async function (err, payload) {
                 if (payload) {
-                    user.findById(payload.userId).then(
-                        (doc)=>{
-                            req.user=doc;
-                            next()
-                        }
-                    )
+                    req.userId = payload.userId;
                 } else {
                    next()
                 }
             });
-
             return await next();
           } else {
             console.log('Access Token missing');

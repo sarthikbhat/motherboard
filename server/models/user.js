@@ -46,6 +46,16 @@ const UserSchema = new Schema({
     type:{
         type:String,
         required:true
+    },
+    verificationOtp:{
+        otp:{
+            type:Number,
+            default:0   
+        },
+        verified:{
+            type:Boolean,
+            default:false,
+        }
     }
 },{
     timestamps:true,
@@ -113,10 +123,67 @@ module.exports = {
             user = await User.findOne({sap_id:sapId}).lean().exec();
         }
         if(user){
-            console.log(user);
             return user;
         }else{
             throw "User Not found";
         }
+    },
+
+    async addOtp(userId,otp){
+        let user = await User.findById(userId).lean().exec();
+        if(user){
+            let verificationOtp = {
+                otp:otp,
+                verified:false
+            }
+            await User.findByIdAndUpdate(userId,{
+                verificationOtp:verificationOtp
+            },{
+                new:true
+            }).lean().exec();
+        }else{
+            throw "User Not Found";
+        }
+    },
+
+    async verifyOTP(details){
+        let user = await User.findOne({sap_id:details.sap_id}).lean().exec();
+        if(user){
+            if(user.verificationOtp.otp===parseInt(details.otp)){
+                user.verificationOtp.verified = true;
+                let usr = await User.findByIdAndUpdate(user._id,{
+                    verificationOtp:user.verificationOtp
+                },{
+                    new:true
+                }).exec();
+                if(usr){
+                    return true;
+                }else{
+                    return false;
+                }
+            }else{
+                return false;
+            }
+        }else{
+            throw "Cant Find User With this SapID";
+        }
+    },
+
+    async changePassword(details){
+        let user = await User.findOne({sap_id:details.sapId}).lean().exec();
+        if(user){
+            if(user.verificationOtp.verified === true){
+                await User.findByIdAndUpdate(user._id,{
+                    password:hashSync(details.password)
+                },{
+                    new:true
+                }).lean().exec();
+                return true;
+            }else{
+                throw "User is Not verified to Change Password";
+            }
+        }else{
+            throw "Cant Find User With this SapID";
+        }   
     }
 }

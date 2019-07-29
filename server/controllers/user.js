@@ -2,6 +2,7 @@ const UserModel = require('../models/user');
 const constants = require('../config/constants');
 const {filteredBody} = require('../utils/filterBody');
 const {sendEmail} = require('../config/sendgrid');
+const {sendOTPMessage} = require('../config/twilio');
 
 
 async function generateOTP() {  
@@ -19,10 +20,10 @@ async function sendOTPviaEmail(sapId){
         let OTP = await generateOTP();
         console.log("OTP>>",OTP);
         let msgDetails = {
-            OTP:OTP,
+            otp:OTP,
             toEmail:user.email,
         }
-
+        await UserModel.addOtp(user._id,OTP);
         let result = await sendEmail(msgDetails);
         if(result){
             return true;
@@ -35,9 +36,17 @@ async function sendOTPviaEmail(sapId){
 }
 
 async function sendOTPviaPhoneNo(sapId){
-    let user = UserModel.checkUser(null,sapId);
+    let user = await UserModel.checkUser(null,sapId);
     if(user){
-
+        let OTP = await generateOTP();
+        console.log("OTP>>",OTP);
+        await UserModel.addOtp(user._id,OTP);
+        let result = await sendOTPMessage(OTP,`+91${user.phoneNo}`);
+        if(result){
+            return true;        
+        }else{
+            return "Twilio Error (Network problem)";
+        }
     }else{
         throw "User Not Found";
     }
@@ -65,6 +74,20 @@ module.exports = {
         }
     },
 
+    async changePassword(req,res,next){
+        try{
+            let body = filteredBody(req.body,constants.WHITELIST.users.password.change);
+            if(body.password ===body.confirmPassword){
+                await UserModel.changePassword(body);
+                return res.success("Password Change Successfull");
+            }else{
+                return res.error("Password And Confirm Password should Match");
+            }
+        }catch(e){
+            return res.error(e);
+        }
+    },
+
     async sendOTP(req,res,next){
         try{
             let body = filteredBody(req.body,constants.WHITELIST.users.sendOTP);
@@ -77,6 +100,23 @@ module.exports = {
         }catch(e){
             return res.error(e);
         }
-    }
+    },
+
+    async verifyOTP(req,res,next){
+        try{
+            let body ={
+                sap_id:req.body.sapId,
+                otp:req.body.otp
+            }
+            let result = await UserModel.verifyOTP(body);
+            if(result){
+                return res.success("OTP Verified!!");
+            }else{
+                throw "Cant verify otp";
+            }
+        }catch(e){
+            return res.error(e);
+        }
+    },
 
 };

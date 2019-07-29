@@ -22,7 +22,17 @@ router.get(
 );
 
 router.post(
-    '/forgot/password',
+    '/send/otp',
     UserController.sendOTP
+);
+
+router.post(
+    '/otp/verify',
+    UserController.verifyOTP
+);
+
+router.post(
+    '/password/change',
+    UserController.changePassword
 );
 module.exports = router;

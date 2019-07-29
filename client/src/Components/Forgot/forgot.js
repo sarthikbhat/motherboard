@@ -8,11 +8,12 @@ import StepContent from '@material-ui/core/StepContent';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import { TextField  , Tooltip} from '@material-ui/core';
+import { TextField  , Tooltip , Checkbox} from '@material-ui/core';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
+import Visibility from '@material-ui/icons/Visibility';
 
 
 const useStyles = makeStyles(theme => ({
@@ -48,6 +49,7 @@ export default function Forgot() {
     const [error, seterror] = React.useState("");
     const [sap, setsap] = React.useState("");
     const [otp, setotp] = React.useState("");
+    const [types, settypes] = React.useState("password");
     const [click1, setclick1] = React.useState(false);
     const [click2, setclick2] = React.useState(false);
     const steps = getSteps();
@@ -313,6 +315,16 @@ seterror("");
         setActiveStep(prevActiveStep => prevActiveStep - 1);
     }
 
+    function visible(){
+        var checks = document.getElementById("check").checked
+        if(checks===true){
+           settypes("text");
+        }
+        else{
+            settypes("password"); 
+        }
+    }
+
     return(
         <div className="login">
             <div className="top"><span className="one" style={{ color: "white" }}>mother</span><span style={{ color: "#414195" }}>Board</span></div>
@@ -375,26 +387,33 @@ seterror("");
                     Change Password
                 </div>
                 <form  id="forms" onSubmit={handlesubmit}>
-                    <Tooltip title="Password should be of minimum 8 characters and must contain One Uppercase letter and a number" placement="bottom-start">
-                        <TextField
-                            id="outlined-name"
-                            label="Enter Password"
-                            margin="normal"
-                            variant="outlined"
-                            className="text"
-                            autoComplete="off"
-                            onChange={handlechange1}
-                        />
-                    </Tooltip>             
+                        <Tooltip title="Password should be of minimum 8 characters and must contain One Uppercase letter and a number" placement="bottom-start">
+                            <TextField
+                                id="outlined-name"
+                                label="Enter Password"
+                                margin="normal"
+                                variant="outlined"
+                                type={types}
+                                className="text"
+                                autoComplete="off"
+                                onChange={handlechange1}
+                            />
+                        </Tooltip>           
                     <TextField
-                        id="outlined-name"
+                        id="outlined-name"  
                         label="Confirm Password"
                         margin="normal"
                         variant="outlined"
                         className="text"
+                        type={types}
                         autoComplete="off"
                         onChange={handlechange2}
                     />
+                    <FormControlLabel
+        control={
+          <Checkbox value="" id="check" onClick={visible} />
+        }
+        label="Show Password"/>
                     <div className="errors" id="name">
                     {error}
                     </div>

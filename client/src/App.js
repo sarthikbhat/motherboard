@@ -11,14 +11,21 @@ class App extends React.Component {
   render() {
     var x=localStorage.getItem('mBKey')==null?(
       <Fragment>
-      {/* <Route path="/" render={()=><Login/>}/> */}
       <Route exact path="/forgot" component={Forgot}/>
+      <Route path="/" render={()=><Login/>}/>
       </Fragment>
     ):(null)
     return (
       <Router>
         <Switch>
-          {x}
+          {/* {x}
+           */}
+           {localStorage.getItem('mBKey')==null?
+           <Route exact path="/forgot" component={Forgot}/>:null
+           }
+           {localStorage.getItem('mBKey')==null?
+           <Route path="/" render={()=><Login/>}/>:null
+           }
           <Route exact path="/" render={()=><Layout child={<Chat/>} />}/>
         </Switch>
       </Router>

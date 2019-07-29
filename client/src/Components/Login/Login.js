@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './Login.scss';
-import { TextField } from '@material-ui/core'
-import Forgot from '../Forgot/forgot';
+import { TextField } from '@material-ui/core';
 import {Link} from 'react-router-dom'
 
 
@@ -69,7 +68,7 @@ class Login extends Component {
         return (
             <div className="login">
                 <div className="top"><span className="one" style={{ color: "white" }}>mother</span><span style={{ color: "#414195" }}>Board</span></div>
-                <div className="papers">
+                <div className="paper">
                     <div className="heads">
                         LOGIN
                     </div>

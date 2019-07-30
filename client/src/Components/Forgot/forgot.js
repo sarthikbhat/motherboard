@@ -13,7 +13,6 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
-import Visibility from '@material-ui/icons/Visibility';
 
 
 const useStyles = makeStyles(theme => ({
@@ -411,7 +410,7 @@ seterror("");
                     />
                     <FormControlLabel
         control={
-          <Checkbox value="" id="check" onClick={visible} />
+          <Checkbox value="" id="check" color="primary" onClick={visible} />
         }
         label="Show Password"/>
                     <div className="errors" id="name">

@@ -13,8 +13,8 @@ export default function configureStore(initialState, history) {
     // const DevTools = require("../components/ReduxDevTools").default;
 
     // allow devs to use their own plugged in browser redux dev tool instead of the builtin component
-    const devToolsEnhancer = window.devToolsExtension()
-    storeEnhancers.push(devToolsEnhancer);
+    // const devToolsEnhancer = window.devToolsExtension()
+    // storeEnhancers.push(devToolsEnhancer);
   }
 
   const middlewareEnhancer = applyMiddleware(...middlewares);

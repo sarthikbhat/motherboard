@@ -1,0 +1,24 @@
+#layoutBody{
+    flex:1;
+    display:flex;
+    flex-direction: row;
+}
+.navigator{
+    flex:0.21;
+    min-width:288px;
+    background-color: green;
+}
+@media (max-width:950px){
+    .navigator{
+        position:fixed;
+        width:289px;
+        left:0;
+        height:100%;
+        transform: translateX(-400px);
+        transition: transform 0.3s ease-out ;
+        z-index:999;
+    }
+    .show{
+        transform: translateX(0px);
+    }
+}

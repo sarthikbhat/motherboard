@@ -388,7 +388,7 @@ seterror("");
                 <form  id="forms" onSubmit={handlesubmit}>
                         <Tooltip title="Password should be of minimum 8 characters and must contain One Uppercase letter and a number" placement="bottom-start">
                             <TextField
-                                id="outlined-name"
+                                id="outlined"
                                 label="Enter Password"
                                 margin="normal"
                                 variant="outlined"
@@ -399,7 +399,7 @@ seterror("");
                             />
                         </Tooltip>           
                     <TextField
-                        id="outlined-name"  
+                        id="outlined"  
                         label="Confirm Password"
                         margin="normal"
                         variant="outlined"

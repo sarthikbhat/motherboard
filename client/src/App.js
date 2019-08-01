@@ -2,10 +2,10 @@ import React, { Fragment } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
-import Layout from './components/Layout/Layout'
-import Chat from './components/Chat/Chat'
-import Login from './components/login/login'
-import Forgot from './components/Forgot/forgot';
+import Layout from './Components/Layout/Layout'
+import Chat from './Components/Chat/Chat'
+import Login from './Components/Login/Login'
+import Forgot from './Components/Forgot/forgot';
 
 class App extends React.Component {
   render() {

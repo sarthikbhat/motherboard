@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Login.scss';
-import { TextField } from '@material-ui/core'
+import { TextField , FormControlLabel , Checkbox } from '@material-ui/core';
+import {Link} from 'react-router-dom'
 
 
 const initstate = {
@@ -8,6 +9,7 @@ const initstate = {
     pass: "",
     nameerr: "",
     passerr: "",
+    types:"password"
 }
 
 
@@ -63,6 +65,21 @@ class Login extends Component {
             });
         }
     };
+
+    visible=()=>{
+        var checks = document.getElementById("check").checked
+        if(checks===true){
+           this.setState({
+               types:"text"
+           })
+        }
+        else{
+            this.setState({
+                types:"password"
+            })
+
+        }
+    }
     render() {
         return (
             <div className="login">
@@ -86,7 +103,7 @@ class Login extends Component {
                             <div className="error1" id="name">{this.state.nameerr}</div>
                             <TextField
                                 id="outlined-password-input"
-                                type="password"
+                                type={this.state.types}
                                 label="Password"
                                 margin="normal"
                                 variant="outlined"
@@ -96,10 +113,15 @@ class Login extends Component {
                                 required
                             />
                             <div className="error2" id="pass">{this.state.passerr}</div>
+                            <FormControlLabel
+                                control={
+                                <Checkbox value="" id="check"color="primary" onClick={this.visible} />
+                                }
+                                label="Show Password"/>
                             <button className="button" onClick={this.handlesubmit}>
                                 Sign In
                             </button>
-                            <span><h4><a href="/">Forgot Password?</a></h4></span>
+                            <span><h4><Link to="/forgot">Forgot Password?</Link></h4></span>
                         </form>
                     </div>
                 </div>

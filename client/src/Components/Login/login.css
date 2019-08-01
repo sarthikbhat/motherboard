@@ -1,9 +1,8 @@
 .login{
-    flex:1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    background: url(../../images/webDev.png) no-repeat center center fixed ; 
+    flex: 1;
+    background: url(../../images/back.png) ; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -12,8 +11,9 @@
 }
 
 .top{
-    font-size: 5vh;
+    font-size: 45px;
     font-weight: 600;
+    margin: 100px auto;
     margin-bottom: 0;
  text-align: center;   
 }
@@ -24,12 +24,13 @@
     box-sizing: border-box;
     overflow: auto;
     padding: 20px;
+    /* transform: translate(50% 50%); */
     margin: 20px auto;
     margin-bottom: 0;
-    background: rgba(255, 255, 255, 0.63);
+    background: white;
     width:500px;
     border-radius: 10px;
-    //  opacity: 0.1; 
+    /* opacity: 1; */
 }
 
 .heads{
@@ -63,7 +64,7 @@
 margin-top: 15px;
 width:100%;
 padding: 20px;
-background:#414195 ;
+background:#171736 ;
 margin-bottom: 18px;
 border-radius: 5px;
 font-size: 18px;
@@ -74,7 +75,7 @@ outline: none;
 }
 
 .button:active , .button:hover{
-    background-color: #393985;
+    background-color: #0a0a18;
     transition: background-color 0.3s ;
 }
 
@@ -121,10 +122,15 @@ a{
     .paper{
         /* flex: 1; */
         width:calc(100% - 30px);
+        height: auto;
         /* height: 20px;    */
         }
     .text{
         width:calc(100%);
+    }
+    .top{
+        margin: 65px auto; 
+        margin-bottom: 0;  
     }
     .button{
         width:100%;
@@ -132,7 +138,7 @@ a{
     }
 
     .heads{
-        font-size: 4vh;
+        font-size: 40px;
     }
 
     .form  span h4{

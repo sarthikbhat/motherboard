@@ -108,10 +108,10 @@ module.exports = {
                 return user;
             }else{
                 console.log("Password doesn't match");
-                throw "Password doesn't match";
+                throw "Password";
             }
         }else{
-            throw "User doesn't Exist";
+            throw "User";
         }
     },
 

@@ -68,7 +68,7 @@ module.exports = {
         try{
             let body  = filteredBody(req.body,constants.WHITELIST.users.login);
             let user = await UserModel.authenticateUser(body.sap_id,body.password);
-            return res.success("Login Successfull",user);
+            return res.success({message:"Login Successfull"},user);
         }catch(e){
             return res.error(e);
         }

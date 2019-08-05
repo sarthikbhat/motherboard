@@ -2,6 +2,7 @@
 const path = require('path');
 const port = 5000;          
 //CUSTOM MODULES
+const cors=require('cors')
 const routes = require('./routes/routes');
 const bodyParser = require('body-parser');
 const {Response} = require('./models/response');
@@ -11,10 +12,12 @@ const app = express();
 var socket = require('socket.io');
 require("./tools/responses");
 
+app.use(cors())
+
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);

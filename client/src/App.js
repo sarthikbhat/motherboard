@@ -6,6 +6,10 @@ import Layout from './Components/Layout/Layout'
 import Chat from './Components/Chat/Chat'
 import Login from './Components/Login/Login'
 import Forgot from './Components/Forgot/forgot';
+import axios from 'axios'
+export const instance = axios.create({
+  baseURL: 'http://localhost:5000/',
+});
 
 class App extends React.Component {
   render() {

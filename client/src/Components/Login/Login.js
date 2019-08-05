@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Login.scss';
 import { TextField , FormControlLabel , Checkbox } from '@material-ui/core';
 import {Link} from 'react-router-dom'
+import {instance} from '../../App'
 
 
 const initstate = {
@@ -52,17 +53,27 @@ class Login extends Component {
         return true;
     };
 
-    handlesubmit = (e) => {
+    handlesubmit = async(e) => {
         e.preventDefault();
         const valid = this.validate();
         if (valid) {
+            const res=await instance.post('users/login', {
+                sap_id:this.state.name,
+                password:this.state.pass
+            })
+            console.log(res)
+            // if(res.message.data.code==500){
+            //     // if(res.message)
+            // }else{
+            //     localStorage.setItem('mBKey',res.data.data.accessToken)
+            // }
             console.log("success");
-            localStorage.setItem('mBKey','abc')
-            var form = document.getElementById("myform");
-            form.reset();
-            this.setState({
-                initstate
-            });
+            // localStorage.setItem('mBKey','abc')
+            // var form = document.getElementById("myform");
+            // form.reset();
+            // this.setState({
+            //     initstate
+            // });
         }
     };
 

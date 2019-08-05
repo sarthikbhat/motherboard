@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import './Chat.scss'
 import Forum from '@material-ui/icons/Forum'
 
+import ChatBar from './Sections/ChatBar/ChatBar'
+import ContactBar from './Sections/ContactBar/ContactBar'
+
 export default class Chat extends Component {
     constructor(props) {
         super(props);
@@ -32,7 +35,9 @@ export default class Chat extends Component {
         var listStud = this.state.openContactBar ? "listStud show" : "listStud"
         return (
             <div id="chatBody" >
-                <div id="chatSect" ></div>
+                <div id="chatSect" >
+                    <ChatBar/>
+                </div>
                 <div className={listStud} >
                     {
                         this.state.width <= 600 ? (
@@ -45,7 +50,9 @@ export default class Chat extends Component {
                     }
                 </div>
                 {this.state.openContactBar===true?
-                    <div style={{position:"absolute",width:"100%",height:"100%",background:"rgba(0,0,0,0.7)",zIndex:100}} onClick={this.contactBarToggler}></div>
+                    <div style={{position:"absolute",width:"100%",height:"100%",background:"rgba(0,0,0,0.7)",zIndex:100}} onClick={this.contactBarToggler}>
+                        <ContactBar/>
+                    </div>
                     :null
                 }
             </div>

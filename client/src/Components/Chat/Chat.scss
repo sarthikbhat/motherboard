@@ -7,7 +7,8 @@
 #chatSect{
     flex:0.67;
     background-color: red;
-
+    position:relative;
+    overflow:hidden;
 }
 .listStud{
     flex:0.33;

@@ -34,7 +34,7 @@
     left: -10px;
 }
 .received{
-  margin-left:30px;
+  margin-left:10px;
   float:left;
   background-color:#ffffff;
   border-top-left-radius: 0;
@@ -155,3 +155,14 @@
   overflow-y:scroll;
 }
 #chatterBox::-webkit-scrollbar { width: 0 !important }
+
+.circleSender{
+  margin-left:10px;
+  width:37px;
+  height:37px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  border-radius: 20px;
+}

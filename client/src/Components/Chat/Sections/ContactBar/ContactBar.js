@@ -24,6 +24,10 @@ const useStyles = makeStyles(theme => ({
     padding:'0',
     margin:'0',
   },
+  maxheight:{
+    minHeight:'61px',
+    maxHeight:'61px',
+  }
 }));
 
 
@@ -49,6 +53,7 @@ export default function ContactBar() {
                         aria-controls="panel1bh-content"
                         id="panel1bh-header"
                         style={{padding:"10px"}}
+                        className={classes.maxheight}
                         >
                         <Typography className={classes.heading}>SE</Typography>
                         </ExpansionPanelSummary>
@@ -79,6 +84,7 @@ export default function ContactBar() {
                         aria-controls="panel1bh-content"
                         id="panel1bh-header"
                         style={{padding:"10px"}}
+                        className={classes.maxheight}
                         >
                         <Typography className={classes.heading}>TE</Typography>
                         </ExpansionPanelSummary>
@@ -109,6 +115,7 @@ export default function ContactBar() {
                         aria-controls="panel1bh-content"
                         id="panel1bh-header"
                         style={{padding:"10px"}}
+                        className={classes.maxheight}
                         >
                         <Typography className={classes.heading}>BE</Typography>
                         </ExpansionPanelSummary>

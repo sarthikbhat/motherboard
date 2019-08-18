@@ -1,11 +1,12 @@
 .nav-header{
-    background-color:brown;
+    background: #3A377E 0% 0% no-repeat padding-box;
+    border: 1px solid #707070;
     padding:10px;
     height:60px;
     overflow:hidden;
     display:flex;
     align-items: center;
-    border-right: 1.5px solid black;
+    // border-right: 1.5px solid black;
     .navigators{
         float:left;
         h3{
@@ -19,15 +20,18 @@
     }
 #navigate{
     // border: 0.5px solid black;
+    border-right:none; 
     width:100%;
     height:100%;
     overflow-y:scroll;
 }
 
 .content{
-    background-color:#ffffff;
-    height:75px;
-    border-bottom:0.5px solid black;
+    // background-color:#ffffff;
+    height:80px;
+    // width:95%;
+    border: 0.5px solid #707070;
+    border-right:none;  
     box-sizing:border-box;
     align-items: center;
     overflow:hidden;
@@ -38,6 +42,10 @@
         margin-left: 10px;
         padding:10px;
     }
+}
+
+.content:active , .content:hover {
+    background: #3A377E 0% 0% no-repeat padding-box;
 }
 
 #navigate::-webkit-scrollbar { width: 0 !important }

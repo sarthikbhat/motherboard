@@ -29,14 +29,14 @@
 }
 .received:after{
   border-width: 0px 10px 10px 0;
-    border-color: transparent #fff transparent transparent;
+    border-color: transparent #DEE2E8 transparent transparent;
     top: 0;
     left: -10px;
 }
 .received{
   margin-left:10px;
   float:left;
-  background-color:#ffffff;
+  background: #DEE2E8 0% 0% no-repeat padding-box;
   border-top-left-radius: 0;
 }
 .sent{
@@ -66,12 +66,16 @@
   }
 }
 .title{
-  background-color:brown;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  border: 0.5px solid #707070;
+  border-left: none;
+  border-right:none;
   padding:10px;
   overflow:hidden;
   display:flex;
   align-items: center;
   .avatar{
+    border: 1px solid #707070;
     width:60px;
     height:60px;
     background-color:white;
@@ -100,12 +104,14 @@
 .typer{
   display:flex;
   justify-content: center;
+  background: #DBDBDB 0% 0% no-repeat padding-box;
   align-items: center;
   position:absolute;
   bottom:0;
   height:50px;
-  width:98%;
-  margin:2%;
+  width:100%;
+  margin:0.2%;
+  padding:1%;
   .inputDiv{
     width:80%;
     height:90%;

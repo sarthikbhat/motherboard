@@ -39,7 +39,11 @@ export default class Chat extends Component {
                     <ChatBar />
                 </div>
                 <div className={listStud} >
-                    <ContactBar />  
+                    {
+                        this.state.openContactBar?(
+                            <ContactBar />  
+                        ):null
+                    }
                     {
                         this.state.width <= 600 ? (
                             <button
@@ -47,7 +51,8 @@ export default class Chat extends Component {
                                 onClick={this.contactBarToggler} >
                                 <Forum />
                             </button>
-                        ) : (null)
+                        ) : (                    <ContactBar />  
+                            )
                     }
                 </div>
                 {this.state.openContactBar === true ?

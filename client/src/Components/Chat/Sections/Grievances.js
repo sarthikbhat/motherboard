@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './grievances.scss'  ;
 import { TextField, Typography } from '@material-ui/core';
+import { MuiThemeProvider, withTheme } from '@material-ui/core/styles';
 import { Link, withRouter } from 'react-router-dom';
-import { instance } from '../../../App';
+import {theme} from '../../theme'
 
 const initstate = {
   sap: '',
@@ -98,6 +99,7 @@ class Grievances extends Component {
 
   render() {
     return (
+      <MuiThemeProvider theme={theme}>
       <div className="login">
         <div className="top">
           <span className="one" style={{ color: 'white' }}>
@@ -187,8 +189,9 @@ class Grievances extends Component {
           </div>
         </div>
       </div>
+      </MuiThemeProvider>
     );
   }
 }
 
-export default withRouter(Grievances);
+export default withTheme(Grievances);

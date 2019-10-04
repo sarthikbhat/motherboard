@@ -38,7 +38,7 @@ class App extends React.Component {
           <Route exact path="/chats" render={()=><Layout child={<Chat/>} />}/>
           <Route exact path="/grievances" render={()=><Layout child={<Grievances/>} />}/>
           <Route exact path="/events" render={()=><Layout child={<Events/>} />}/>
-          <Route exact path="/community" render={()=><Layout child={<Community/>} />}/>
+          <Route exact path="/responses" render={()=><Layout child={<Community/>} />}/>
           <Route exact path="/notes" render={()=><Layout child={<Notes/>} />}/>
         </Switch>
       </Router>

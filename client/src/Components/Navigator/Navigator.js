@@ -14,8 +14,8 @@ export default class Navigator extends Component {
             <Link to="/grievances" className="content">
               <h3>Girevances</h3>
             </Link>
-            <Link to="/community" className="content">
-              <h3>Community</h3>
+            <Link to="/responses" className="content">
+              <h3>Responses</h3>
             </Link>
             <Link to="/notes" className="content">
               <h3>Notes</h3>

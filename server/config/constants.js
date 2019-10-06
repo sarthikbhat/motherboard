@@ -6,7 +6,8 @@ const WHITELIST = {
         sendOTP:['email','phoneNo','sap_id'],
         password:{
             change:['password','confirmPassword','sapId'],
-        }
+        },
+        classify:['role','yearOfJoining','division','semester','batch','sapId','designation','classTeacher','subjects','mentor']
     }
 }
 

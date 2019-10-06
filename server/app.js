@@ -9,8 +9,17 @@ const {Response} = require('./models/response');
 const chalk = require('chalk');
 const express = require('express');
 const app = express();
-var socket = require('socket.io');
+const { ApolloServer } = require('apollo-server-express');
+const {verify} = require('./auth/auth');
+// const { execute, subscribe ,graphiqlExpress } = require('graphql') ;
+const http = require('http') ;
+// const { SubscriptionServer } = require('subscriptions-transport-ws');
+// var socket = require('socket.io');
 require("./tools/responses");
+
+//graphql related imports.
+const typeDefs = require('./graphQl/schemas');
+const resolvers = require('./graphQl/resolvers');
 
 app.use(cors())
 
@@ -20,7 +29,21 @@ app.set('views', 'views');
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(express.urlencoded({extended:false}));
 app.use(routes);
+
+const graphQlServer = new ApolloServer({
+  // These will be defined for both new or existing servers
+  typeDefs,
+  resolvers,
+  context: ({ req }) => ({ request: req}),
+  playground: process.env.NODE_ENV !== 'production',
+});
+
+
+graphQlServer.applyMiddleware({ app: app,verify });
+const httpServer = http.createServer(app);
+graphQlServer.installSubscriptionHandlers(httpServer);
 
 
 app.response.success = function(message, data, displayMessage, code){
@@ -59,7 +82,7 @@ app.response.mime = function(readstream){
   readstream.pipe(this);
 };
 
-var server = app.listen(port, err => {
+var server = httpServer.listen(port, err => {
   if (err) {
     console.log(chalk.red('Cannot run!'));
   } else {
@@ -76,10 +99,10 @@ var server = app.listen(port, err => {
 });
 
 //Socket Setup
-var io = socket(server);
-io.on('connection',function(socket){
-  console.log(chalk.green.bold(`Socket Connected Successfuly!`,),);
-  socket.on('chat', function(data){
-    io.sockets.emit('chat', data);
-  });
-})
+// var io = socket(server);
+// io.on('connection',function(socket){
+//   console.log(chalk.green.bold(`Socket Connected Successfuly!`,),);
+//   socket.on('chat', function(data){
+//     io.sockets.emit('chat', data);
+//   });
+// })

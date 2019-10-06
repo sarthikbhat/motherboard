@@ -1,4 +1,6 @@
 const UserModel = require('../models/user');
+const TeacherModel = require('../models/teacher');
+const StudentModel = require('../models/student');
 const constants = require('../config/constants');
 const {filteredBody} = require('../utils/filterBody');
 const {sendEmail} = require('../config/sendgrid');
@@ -119,4 +121,20 @@ module.exports = {
         }
     },
 
+    async classifyUser(req,res,next){ 
+        try{
+            let body = filteredBody(req.body,constants.WHITELIST.users.classify);
+            let result = {};
+            if(body.role == 'teacher'){
+                result = await TeacherModel.addTeacher(body);
+            }else if(body.role == 'student'){
+                result = await StudentModel.addStudent(body);
+            }else{
+                return res.error("Role can be teacher/student. ");
+            }
+            return res.success("User Classified",result);
+        }catch(e){
+            return res.error(e);
+        }
+    }
 };

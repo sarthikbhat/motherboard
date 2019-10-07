@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Teachers</h1>
+    <main>
+        <h3>Add a teacher</h3>
+        <form class="product-form" action="/add-teacher" method="POST">
+            <div class="form-control">
+                <label for="title">Sap_id</label>
+                <input type="text" name="sap_id" id="sap_id">
+            </div>
+            <div class="form-control">
+                    <label for="title">First Name</label>
+                    <input type="text" name="fname" id="fname">
+            </div>
+            <div class="form-control">
+                    <label for="title">Last Name</label>
+                    <input type="text" name="lname" id="lname">
+            </div>
+            <div class="form-control">
+                <label for="title">Email_id</label>
+                <input type="text" name="email_id" id="email_id">
+            </div>
+            <div class="form-control">
+                <label for="title">Password</label>
+                <input type="text" name="password" id="password">
+            </div>
+            <div class="form-control">
+                <label for="title">Address</label>
+                <input type="text" name="address" id="address">
+            </div>
+            <div class="form-control">
+                <label for="title">Phone number:</label>
+                <input type="text" name="phone_no" id="phone_no">
+            </div>
+            <div class="form-control">
+                <label for="title">Year of joining</label>
+                <input type="text" name="year_of_joining" id="year_of_joining">
+            </div>
+
+            <div class="form-control">
+                <label for="imageUrl">Designation</label>
+                <input type="text" name="designation" id="designation">
+            </div>
+            <div class="form-control">
+                <label for="price">salary </label>
+                <input type="text" name="salary" id="salary">
+            </div>
+            <div class="form-control">
+                <label for="class_teacher">Class Teacher</label>
+                <input type name="class_teacher" id="class_teacher" >
+            </div>
+            <div class="form-control">
+                <label for="mentor">Mentor</label>
+                <input type name="mentor" id="mentor" >
+            </div>
+
+            <button class="btn" type="submit">Add Teacher</button>
+        </form>
+    </main>
+    <main>
+            <h3>Delete a teacher</h3>
+            <form class="product-form" action="/delete-teacher" method="POST">
+                <div class="form-control">
+                    <label for="title">Sap_id</label>
+                    <input type="text" name="sap_id" id="sap_id">
+                </div>
+                <button class="btn" type="submit">Delete teacher</button>
+            </form>
+    </main>
+    <main>
+            <h3>Fetch all teachers</h3>
+            <form class="product-form" action="/fetch-all-teacher" method="POST">
+                <button class="btn" type="submit">Fetch</button>
+            </form>
+    </main>
+    <main>
+        <h3>Find a teacher</h3>
+        <form class="product-form" action="/find-teacher" method="POST">
+            <div class="form-control">
+                <label for="title">Sap_id</label>
+                <input type="text" name="sap_id" id="sap_id">
+            </div>
+            <button class="btn" type="submit">Find teacher</button>
+        </form>
+    </main>
+</body>
+</html>

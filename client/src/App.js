@@ -7,6 +7,10 @@ import Chat from './Components/Chat/Chat'
 import Login from './Components/Login/Login'
 import Forgot from './Components/Forgot/forgot';
 import axios from 'axios'
+import Grievances from './Components/Chat/Sections/Grievances';
+import Events from './Components/Chat/Sections/Events';
+import Community from './Components/Chat/Sections/Community';
+import Notes from './Components/Chat/Sections/Notes';
 export const instance = axios.create({
   baseURL: 'http://localhost:5000/',
 });
@@ -31,6 +35,11 @@ class App extends React.Component {
            <Route path="/" render={()=><Login/>}/>:null
            }
           <Route exact path="/" render={()=><Layout child={<Chat/>} />}/>
+          <Route exact path="/chats" render={()=><Layout child={<Chat/>} />}/>
+          <Route exact path="/grievances" render={()=><Layout child={<Grievances/>} />}/>
+          <Route exact path="/events" render={()=><Layout child={<Events/>} />}/>
+          <Route exact path="/responses" render={()=><Layout child={<Community/>} />}/>
+          <Route exact path="/notes" render={()=><Layout child={<Notes/>} />}/>
         </Switch>
       </Router>
     );

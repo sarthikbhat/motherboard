@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import Header from '../Header/Header'
 import './Layout.scss'
+import Navigator from '../Navigator/Navigator'
 
 export default class Layout extends Component {
     constructor(props){
@@ -27,7 +28,9 @@ export default class Layout extends Component {
             <React.Fragment>
                 <Header navigationToggler={this.navigationToggler} />
                 <div id="layoutBody">
-                    <div className={toggler} ></div>
+                    <div className={toggler} >
+                        <Navigator/>
+                    </div>
                     {this.state.openNavBar===true?
                         <div style={{position:"absolute",width:"100%",height:"100%",background:"rgba(0,0,0,0.7)",zIndex:100}} onClick={this.navigationToggler}></div>
                         :null

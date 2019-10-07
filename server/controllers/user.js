@@ -107,7 +107,7 @@ module.exports = {
     async verifyOTP(req,res,next){
         try{
             let body ={
-                sap_id:req.body.sapId,
+                sap_id:req.body.sapId || req.body.sap_id,
                 otp:req.body.otp
             }
             let result = await UserModel.verifyOTP(body);

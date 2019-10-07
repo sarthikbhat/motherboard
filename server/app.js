@@ -28,7 +28,9 @@ app.get('/student',(req,res)=>{
     res.render('student');
 });
 app.get('/take-attendance',(req,res)=>{
-    res.render('take-attendance')
+    res.render('take-attendance',{
+        students:[]
+    })
 })
 app.post('/add-teacher',Routes);
 app.post('/delete-teacher',Routes);

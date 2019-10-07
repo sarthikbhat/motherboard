@@ -46,7 +46,8 @@ exports.postGenerateList = (req, res, next) => {
   const division = req.body.division;
   Teacher.GenerateList(semester,division,function(err,rows){
     if(err) throw err;
-    console.log(rows);
+    res.render('take-attendance',{
+      students:rows
+    })
   });
-  res.redirect('/teacher');
 };

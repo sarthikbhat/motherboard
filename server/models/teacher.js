@@ -45,7 +45,9 @@ module.exports = class Teacher {
   }
   
   static GenerateList(semester,division,callback){
-    db.query('SELECT sap_id FROM students WHERE semester = '+db.escape(semester)+'AND division = '+db.escape(division),callback);
+    // db.query('SELECT sap_id,fname,lname FROM users WHERE sap_id IN (SELECT sap_id FROM students WHERE semester = '+db.escape(semester)+'AND division = '+ db.escape(division),callback);
+    db.query("SELECT sap_id,fname,lname FROM users WHERE sap_id IN (SELECT sap_id FROM students WHERE semester = "+db.escape(semester)+" AND division = "+db.escape(division)+")",callback)
+
   }
 
 };

@@ -6,7 +6,36 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Take Attendance</title>
 </head>
+<style>
+    table, th, td {
+      border: 1px solid black;
+    }
+</style>
 <body>
+    <% if(students.length > 0) {  %>
+    <main>
+        <!-- STUDENTS HERE -->
+        <table style="width:75%">
+                <tr>
+                    <th>Sap_id</th>
+                    <th>Firstname</th>
+                    <th>Lastname</th> 
+                </tr>
+                <% for (let student of students) { %>
+                    <tr>
+                        <td><%= student.sap_id %></td>
+                        <td><%= student.fname %></td>
+                        <td><%= student.lname %></td>
+                    </tr>
+                <% } %>
+        <!-- <div class="form-control">
+            <label for="title">CourseID:</label>
+            <input type="text" name="courseid" id="courseid">
+        </div>
+        <button class="btn" type="submit">SUBMIT</button> -->
+    </main>
+    <% } else { %>
+
     <main>
         <form class="product-form" action="/generate-list" method="POST">
             <div class="form-control">
@@ -21,14 +50,7 @@
             <button class="btn" type="submit">Generate List</button>
         </form>
     </main>
-    <main>
-        <!-- STUDENTS HERE -->
-        <!-- <div class="form-control">
-            <label for="title">CourseID:</label>
-            <input type="text" name="courseid" id="courseid">
-        </div>
-        <button class="btn" type="submit">SUBMIT</button> -->
-    </main>
+    <% } %>
 
 </body>
 </html>

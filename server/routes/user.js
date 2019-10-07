@@ -35,4 +35,8 @@ router.post(
     '/password/change',
     UserController.changePassword
 );
+router.post(
+    '/classify',
+    UserController.classifyUser
+);
 module.exports = router;

@@ -1,5 +1,4 @@
 const  { model, Schema } = require('mongoose');
-const timestamps = require("mongoose-timestamp");
 const db = require('../utils/database');
 const  { hashSync, compareSync } = require('bcrypt-nodejs');
 const jwt=require('jsonwebtoken');

@@ -1,8 +1,13 @@
 const  { model, Schema } = require('mongoose');
-const timestamps = require("mongoose-timestamp");
+const db = require('../utils/database');
+const User = require('./user');
 
 const StudentSchema = new Schema({
-    currentyear:{
+    yearOfJoining:{
+        type: String,
+        required: true
+    },
+    division:{
         type: String,
         required: true
     },
@@ -14,10 +19,35 @@ const StudentSchema = new Schema({
         type: String,
         required: true
     },
-    user:{
+    userId:{
         type: Schema.Types.ObjectId,
         ref: "User"
     }
+},{
+    timestamps:true,
+    versionKey: false,
 });
-StudentSchema.plugin(timestamps);
-module.exports = model("Student", StudentSchema);
+
+let Student = db.model("Student", StudentSchema);
+
+module.exports = {
+    async addStudent(student){
+        let user = await User.checkUser(null,student.sapId);
+        let existedStudent = await Student.findOne({
+            userId:user._id
+        });
+        student.userId = user._id;
+        if(!existedStudent){
+            let newStudent = await Student.create(student);
+            newStudent = await Student.findById(newStudent._id)
+                .populate('userId','sap_id name surname department')
+                .lean()
+                .exec();
+            console.log(newStudent);
+            return newStudent;
+        }else{
+            throw "Student already Exist";
+        }
+    }
+}
+

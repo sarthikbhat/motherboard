@@ -10,6 +10,7 @@ router.post('/add-teacher', teacherController.postAddTeacher);
 router.post('/delete-teacher', teacherController.postDeleteTeacher);
 router.post('/fetch-all-teacher',teacherController.postFetchTeachers);
 router.post('/find-teacher',teacherController.postFetchBySapId);
+router.post('/generate-list',teacherController.postGenerateList);
 router.post('/add-student',studentController.postAddStudent);
 router.post('/delete-student', studentController.postDeleteStudent);
 router.post('/fetch-all-student',studentController.postFetchStudents);

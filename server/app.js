@@ -20,12 +20,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/',(req,res)=>{
     res.render('index');
-})
+});
 app.get('/teacher',(req,res)=>{
     res.render('teacher');
-})
+});
 app.get('/student',(req,res)=>{
     res.render('student');
+});
+app.get('/take-attendance',(req,res)=>{
+    res.render('take-attendance')
 })
 app.post('/add-teacher',Routes);
 app.post('/delete-teacher',Routes);
@@ -35,6 +38,7 @@ app.post('/add-student',Routes);
 app.post('/delete-student',Routes);
 app.post('/fetch-all-student',Routes);
 app.post('/find-student',Routes);
+app.post('/generate-list',Routes);
 
 
 app.listen(3000);

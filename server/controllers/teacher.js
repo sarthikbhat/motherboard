@@ -41,3 +41,12 @@ exports.postFetchBySapId = (req, res, next) => {
   });
   res.redirect('/teacher');
 };
+exports.postGenerateList = (req, res, next) => {
+  const semester = req.body.semester;
+  const division = req.body.division;
+  Teacher.GenerateList(semester,division,function(err,rows){
+    if(err) throw err;
+    console.log(rows);
+  });
+  res.redirect('/teacher');
+};

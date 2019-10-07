@@ -43,5 +43,10 @@ module.exports = class Teacher {
   static findBysap_id(sap_id,callback) {
     db.query('SELECT * FROM users NATURAL JOIN teachers WHERE sap_id = '+db.escape(sap_id),callback);
   }
+  
+  static GenerateList(semester,division,callback){
+    db.query('SELECT sap_id FROM students WHERE semester = '+db.escape(semester)+'AND division = '+db.escape(division),callback);
+  }
+
 };
   

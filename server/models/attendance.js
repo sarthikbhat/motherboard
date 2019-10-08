@@ -17,11 +17,6 @@ module.exports = class Attendance {
       console.log(sql);
       db.query(sql);
     }
-    if(this.subject == 'sub2'){
-      var sql = " UPDATE attendance SET sub2 = sub2 + 1 WHERE sap_id = "+db.escape(this.sap_id);
-      console.log(sql);
-      db.query(sql);
-    }
     if(this.subject == 'sub3'){
       var sql = " UPDATE attendance SET sub3 = sub3 + 1 WHERE sap_id = "+db.escape(this.sap_id);
       console.log(sql);
@@ -80,10 +75,33 @@ module.exports = class Attendance {
       db.query(sql);
     }
   }
+  static lecturesTaken(subject,cb){
+    if(subject == 'sub1'){
+      db.query("UPDATE lectures SET sub1 = sub1 + 1",cb);
+    }
+    if(subject == 'sub2'){
+      db.query("UPDATE lectures SET sub2 = sub2 + 1",cb);
+    }
+    if(subject == 'sub3'){
+      db.query("UPDATE lectures SET sub3 = sub3 + 1",cb);
+    }
+    if(subject == 'sub4'){
+      db.query("UPDATE lectures SET sub4 = sub4 + 1",cb);
+    }
+    if(subject == 'sub5'){
+      db.query("UPDATE lectures SET sub5 = sub5 + 1",cb);
+    }
+    if(subject == 'sub5'){
+      db.query("UPDATE lectures SET sub6 = sub6 + 1",cb);
+    }
+  }
   static resetAttendance(){
     //RESET ATTENDANCE AT START OF SEMESTER OR MONTH 
     db.query('TRUNCATE TABLE attendance');
     db.query('INSERT INTO attendance(sap_id) SELECT sap_id FROM students');
+  }
+  static resetTotalLectures(){
+    db.query('TRUNCATE TABLE lectures');
   }
 };
   

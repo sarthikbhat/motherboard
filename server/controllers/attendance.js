@@ -19,7 +19,7 @@ exports.postAttendance = (req,res) => {
                 var attend = new Attendance(att[i].sap_id,att[i],subject,'P');
                 attend.present();
             }else if(att[i].attendance == 'A'){
-                var attend = new Attendance(att[i].sap_id,att[i],subject,'P');
+                var attend = new Attendance(att[i].sap_id,att[i],subject,'A');
                 attend.absent();
             }
         }

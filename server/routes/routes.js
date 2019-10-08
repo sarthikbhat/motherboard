@@ -17,6 +17,7 @@ router.post('/delete-student', studentController.postDeleteStudent);
 router.post('/fetch-all-student',studentController.postFetchStudents);
 router.post('/find-student',studentController.postFetchBySapId);
 
+router.post('/add-grievances',grievanceController.postAddGrievance);
 router.post('/att-report',reportController.genReport);
 
 module.exports = router;

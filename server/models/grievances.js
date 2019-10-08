@@ -11,10 +11,20 @@ module.exports = class Grievance {
     console.log(sql);
     db.query(sql,cb);
   }
-  static solveGrievance(grievanceId,response,cb){
-    var sql = "UPDATE grievances SET response = "+db.escape(response)+"WHERE id = "+db.escape(grievanceId);
+  static solvingGrievance(cb){
+    var sql = "UPDATE grievances SET response = "+db.escape(response)+", isSolved = 1 WHERE id = "+db.escape(grievanceId);
     console.log(sql);
     db.query(sql,cb);
-  }  
+  }
+  static pendingGrievances(cb){
+    var sql = "SELECT *  FROM grievances WHERE isSolved = 0 ORDER BY id";
+    console.log(sql);
+    db.query(sql,cb);
+  }
+  static solvedGrievances(cb){
+    var sql = "SELECT *  FROM grievances WHERE isSolved = 1 ORDER BY id";
+    console.log(sql);
+    db.query(sql,cb);
+  }     
 };
   

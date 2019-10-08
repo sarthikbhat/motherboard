@@ -20,7 +20,27 @@ exports.postSolveGrievance = (req,res,next)=>{
     // var grievanceId = "875153";
     // var response = "report to modiji";
 
-    Grievance.solveGrievance(grievanceId,response,function(error,rows){
+    Grievance.solvingGrievance(grievanceId,response,function(error,rows){
         if (error) throw error;
+    });
+};
+exports.postPendingGrievances = (req,res,next)=>{
+    Grievance.pendingGrievances(function(error,rows){
+        if (error) throw error;
+        console.log(rows);
+        // sending  the pending grievances
+        // res.render('somepage',{
+        //     grievances:rows
+        // });
+    });
+};
+exports.postSolvedGrievances = (req,res,next)=>{
+    Grievance.solvedGrievances(function(error,rows){
+        if (error) throw error;
+        console.log(rows);
+        // sending  the solved grievances
+        // res.render('somepage',{
+        //     grievances:rows
+        // });
     });
 };

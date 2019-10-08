@@ -174,7 +174,7 @@ export default function Forgot() {
                 console.log("number");
                 numerr = "cannot";
             }
-            if (pwds.length <= 8) {
+            if (pwds.length < 8) {
                 console.log('length');
                 lenerr = "cannot";
             }
@@ -251,6 +251,7 @@ export default function Forgot() {
                 setpwd("");
                 seterror("");
                 console.log("Password Changed");
+                window.location.href="/login"
                 return true;
             }else{
                 console.log("Error from server check the body");

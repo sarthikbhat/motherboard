@@ -1,5 +1,5 @@
 const Report = require('../models/attendance-report');
-// exports.genReport = (req,res) =>{
+exports.genReport = (req,res) =>{
     var countSub1 = 0;
     var countSub2 = 0;
     var countSub3 = 0;
@@ -29,8 +29,10 @@ const Report = require('../models/attendance-report');
                     element.sub6 = (element.sub6/countSub6)*100;
                 });
                 console.log(rows);
-                //res sends  data here
+                res.render('attendance-report',{
+                   students:rows  
+                });
             });
         });
     });
-// };
+};

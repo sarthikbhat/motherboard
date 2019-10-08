@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Attendance Report</title>
+</head>
+<style>
+    table, th, td {
+      border: 1px solid black;
+    }
+</style>
+<body>
+    <div margin="auto" >
+        <img src="../ltthead.png" alt="LetterHead" class="center">
+    </div>
+    
+    <% if(students.length > 0) {  %>
+    <main>
+        <!-- STUDENTS HERE -->
+        <table style="width:100%">
+                <tr>
+                    <th>Sap_id</th>
+                    <th>SUB1 %</th>
+                    <th>SUB2 %</th>
+                    <th>SUB3 %</th>
+                    <th>SUB4 %</th>
+                    <th>SUB5 %</th>
+                    <th>SUB6 %</th>
+                </tr>
+                <% for (let student of students) { %>
+                    <tr>
+                        <td><%= student.sap_id %></td>
+                        <td><%= student.sub1 %></td>
+                        <td><%= student.sub2 %></td>
+                        <td><%= student.sub3 %></td>
+                        <td><%= student.sub4 %></td>
+                        <td><%= student.sub5 %></td>
+                        <td><%= student.sub6 %></td>
+                   </tr>
+                <% } %>
+        <!-- <div class="form-control">
+            <label for="title">CourseID:</label>
+            <input type="text" name="courseid" id="courseid">
+        </div>
+        <button class="btn" type="submit">SUBMIT</button> -->
+    </main>
+    <% } else { %>
+            <h1>No report</h1>
+    <% } %>
+
+</body>
+</html>

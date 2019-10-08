@@ -1,5 +1,5 @@
 const Attendance = require('../models/attendance');
-// exports.postAttendance = (req,res) => {
+exports.postAttendance = (req,res) => {
     var subject = 'sub1';
     const att = [{
         sap_id:100,
@@ -19,4 +19,4 @@ const Attendance = require('../models/attendance');
             attend.absent();
         }
     }
-// };
+};

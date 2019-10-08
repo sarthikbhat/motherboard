@@ -1,6 +1,6 @@
 const db = require('../util/database');
 
-module.exports = class attendance {
+module.exports = class Attendance {
   constructor(sap_id, attendance ,subject) {
     this.sap_id = parseInt(sap_id,10);
     this.attendance = attendance;
@@ -81,7 +81,9 @@ module.exports = class attendance {
     }
   }
   static resetAttendance(){
-    //RESET THE SAP_ID'S HERE
+    //RESET ATTENDANCE AT START OF SEMESTER OR MONTH 
+    db.query('TRUNCATE TABLE attendance');
+    db.query('INSERT INTO attendance(sap_id) SELECT sap_id FROM students');
   }
 };
   

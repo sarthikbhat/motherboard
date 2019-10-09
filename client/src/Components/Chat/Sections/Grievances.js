@@ -100,7 +100,7 @@ class Grievances extends Component {
   render() {
     return (
       <MuiThemeProvider theme={theme}>
-      <div className="login">
+      <div className="logins">
         <div className="top">
           <span className="one" style={{ color: 'white' }}>
             griev

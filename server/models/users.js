@@ -10,39 +10,31 @@ module.exports = class User {
     this.fname =fname;
     this.lname =lname;
   }
-  save() {
+  async save() {
     var sql = "INSERT INTO users(sap_id, email_id, password, address, phone_no, year_of_joining,fname,lname) VALUES ("+db.escape(this.sap_id)+","+db.escape(this.email_id)+","+db.escape(this.password)+","+db.escape(this.address)+","+db.escape(this.phone_no)+","+db.escape(this.year_of_joining)+","+db.escape(this.fname)+","+db.escape(this.lname)+")";
     console.log(sql);
-      db.query(sql,function(error,results,fields){
-      if (error){
-        console.log(error);
-      }
-      if(results){
-        console.log(results);
-      }
-    });
+    let {results} = await db.query(sql);
+    console.log(results);
   }
   
-  static deleteBysap_id(sap_id) {
+  async static deleteBysap_id(sap_id) {
     const sap_id = parseInt(id,10);
     var sql = "DELETE FROM users WHERE sap_id = "+db.escape(sap_id);
     console.log(sql);
-      db.query(sql,function(error,results,fields){
-      if (error){
-        console.log(error);
-      }
-      if(results){
-        console.log(results);
-      }
-    });
+    let {results} = await db.query(sql);
+    return results;
   }
   
-  static fetchAll() {
-    return db.execute('SELECT * FROM users');
+  async static fetchAll() {
+    let {results} = await db.query('SELECT * FROM users');
+    return results;
   }
   
-  static findBysap_id(sap_id) {
-    db.query('');
+  async static findBysap_id(sap_id) {
+    var sql = "SELECT * FROM users WHERE sap_id = "+db.escape(sap_id);
+    console.log(sql);
+    let {results} = await db.query(sql);
+    return results;
   }
 };
   

@@ -4,6 +4,7 @@ const express = require('express');
 const teacherController = require('../controllers/teacher');
 const studentController = require('../controllers/student');
 const reportController = require('../controllers/attendance-report');
+const grievanceController = require('../controllers/grievances');
 
 const router = express.Router();
 

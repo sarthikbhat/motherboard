@@ -1,12 +1,18 @@
 const db = require('../util/database');
 
 module.exports = class Report{
-    static getAttendance(cb){
-        db.query("SELECT *  FROM attendance  WHERE sap_id IN (SELECT sap_id FROM students)",cb);
+    async  getAttendance(){
+        var sql = "SELECT *  FROM attendance  WHERE sap_id IN (SELECT sap_id FROM students)";
+        console.log(sql);
+        let {results} = await db.query(sql);
+        return results;
     }
-    static totalLectures(subject,cb){
+    async  totalLectures(subject){
         if(subject == "sub1"){
-            db.query("SELECT * FROM lectures",cb);
+            var sql = "SELECT * FROM lectures";
+            console.log(sql);
+            let {results} = await db.query(sql);
+            return results;
         }
     }
 }

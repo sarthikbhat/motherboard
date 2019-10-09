@@ -1,7 +1,7 @@
 const Teacher = require('../models/teacher');
 const User = require('../models/users');
 
-exports.postAddTeacher = (req, res, next) => {
+exports.postAddTeacher = async (req, res, next) => {
   const sap_id = req.body.sap_id;
   const designation = req.body.designation;
   const mentor = req.body.mentor;
@@ -15,9 +15,9 @@ exports.postAddTeacher = (req, res, next) => {
   const phone_no = req.body.phone_no;
   const year_of_joining = req.body.year_of_joining;
   const user = new User(sap_id,email_id,password,address,phone_no,year_of_joining,fname,lname);
-  user.save(); 
+  await user.save(); 
   const teacher = new Teacher(sap_id, designation, mentor, class_teacher, salary);
-  teacher.save();
+  await teacher.save();
   res.redirect('/teacher');
 };
 exports.postDeleteTeacher = (req, res, next) => {

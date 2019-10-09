@@ -9,22 +9,26 @@ module.exports = class Grievance {
   save(cb){
     var sql = "INSERT INTO grievances(sap_id, grievance, description) VALUES ("+db.escape(this.sap_id)+","+db.escape(this.grievance)+","+db.escape(this.description)+")";
     console.log(sql);
-    db.query(sql,cb);
+    let {results} = await db.query(sql);
+    return results;
   }
   static solvingGrievance(cb){
     var sql = "UPDATE grievances SET response = "+db.escape(response)+", isSolved = 1 WHERE id = "+db.escape(grievanceId);
     console.log(sql);
-    db.query(sql,cb);
+    let {results} = await db.query(sql);
+    return results;
   }
   static pendingGrievances(cb){
     var sql = "SELECT *  FROM grievances WHERE isSolved = 0 ORDER BY id";
     console.log(sql);
-    db.query(sql,cb);
+    let {results} = await db.query(sql);
+    return results;
   }
   static solvedGrievances(cb){
     var sql = "SELECT *  FROM grievances WHERE isSolved = 1 ORDER BY id";
     console.log(sql);
-    db.query(sql,cb);
+    let {results} = await db.query(sql);
+    return results;
   }     
 };
   

@@ -45,7 +45,7 @@ export default function ContactBar() {
             <h3>GROUPS</h3>
             </div>
             </div>
-            <div id="groupOuterBox" style={{ height: window.innerHeight - 142 }} >
+            <div id="groupOuterBox" style={{ height: window.innerHeight - 151 }} >
                 <div id="contactBar">
                     <ExpansionPanel expanded={expanded === 'panel1'} onChange={handleChange('panel1')} id="expand">
                         <ExpansionPanelSummary

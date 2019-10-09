@@ -8,19 +8,19 @@ export default class Navigator extends Component {
       <React.Fragment>
         <div id="navigateOuterBox" style={{ height: window.innerHeight - 69 }}>
           <div id="navigate">
-            <Link to="/chats" className="content">
+            <Link to="/chats" className="content" id="chats">
               <h3>Chats</h3>
             </Link>
-            <Link to="/grievances" className="content">
+            <Link to="/grievances" className="content" id="grievances">
               <h3>Girevances</h3>
             </Link>
-            <Link to="/responses" className="content">
+            <Link to="/responses" className="content" id="responses">
               <h3>Responses</h3>
             </Link>
-            <Link to="/notes" className="content">
+            <Link to="/notes" className="content" id="notes">
               <h3>Notes</h3>
             </Link>
-            <Link to="/events" className="content">
+            <Link to="/events" className="content" id="events">
               <h3>Events/Calander</h3>
             </Link>
           </div>

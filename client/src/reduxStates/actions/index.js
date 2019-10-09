@@ -1,1 +1,1 @@
-export { getUserList } from './userList'
+export { getUserList, userLogIn, userLogOut } from './userList'

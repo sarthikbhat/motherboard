@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from "react-redux";
 import { IntlProvider } from "react-intl";
-import createHistory from "history/createBrowserHistory";
+import {createBrowserHistory as createHistory} from "history";
 
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
@@ -19,7 +19,10 @@ const client = new ApolloClient({
   uri: "http://localhost:5000/graphQl"
 });
 
-const store = configureStore({}, history);
+const store = configureStore({
+  isLoggedIn:false,
+  user:null
+}, history);
 
 const rootElement = document.getElementById("root");
 

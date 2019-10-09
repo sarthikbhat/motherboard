@@ -1,9 +1,46 @@
 import React, { Component } from 'react'
 import { Send } from '@material-ui/icons';
+import gql from "graphql-tag";
+import { Query } from "react-apollo";
 
 import "./ChatBar.scss"
 
+const FETCH_MESSAGES = gql`
+{
+	messages(group:"TE-B",sapId:"60004170120"){
+        userId
+        body
+  }
+}
+`
+
 export default class ContactBar extends Component {
+
+    allMessages = () => (
+
+        <Query query={FETCH_MESSAGES}>
+            {
+                ({ loading, error, data }) => {
+                    if (loading)
+                        return "Loading...";
+                    if (error)
+                        return "Error..."
+                    return (
+                        data.messages.map(elm => {
+                            return(
+                            <div class="message sent">
+                                {console.log(elm)}
+                                {elm.body}
+                                <span class="metadata">
+                                    <span class="time">{new Date().getHours()}:{new Date().getMinutes()}</span><span class="tick"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" id="msg-dblcheck-ack" x="2063" y="2076"><path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.88a.32.32 0 0 1-.484.032l-.358-.325a.32.32 0 0 0-.484.032l-.378.48a.418.418 0 0 0 .036.54l1.32 1.267a.32.32 0 0 0 .484-.034l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.88a.32.32 0 0 1-.484.032L1.892 7.77a.366.366 0 0 0-.516.005l-.423.433a.364.364 0 0 0 .006.514l3.255 3.185a.32.32 0 0 0 .484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z" fill="#4fc3f7" /></svg></span>
+                                </span>
+                            </div>)
+                        })
+                    )
+                }
+            }
+        </Query>
+    )
 
     messager = (e) => {
 
@@ -52,12 +89,12 @@ export default class ContactBar extends Component {
                 </div>
                 <div id="chatterOuterBox" style={{ height: window.innerHeight - 220 }} >
                     <div id="chatterBox" >
-                        <div style={{width:"100%",position:"relative",display:"flex",alignItems:"center"}} >
+                        <div style={{ width: "100%", position: "relative", display: "flex", alignItems: "center" }} >
                             <div className="circleSender" >
                                 PB
                             </div>
                             <div class="message received">
-                            Halo frands.Halo frands.Halo frands.Halo frands.Halo frands.Halo frands.Halo frands.Halo frands.Halo frands.Halo frands.
+                                Halo frands.Halo frands.Halo frands.Halo frands.Halo frands.Halo frands.Halo frands.Halo frands.Halo frands.Halo frands.
                             <span class="metadata" ><span class="time">9:03 pm</span></span>
                             </div>
                         </div>
@@ -67,12 +104,12 @@ export default class ContactBar extends Component {
                                 <span class="time">9:04 pm</span><span class="tick"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" id="msg-dblcheck-ack" x="2063" y="2076"><path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.88a.32.32 0 0 1-.484.032l-.358-.325a.32.32 0 0 0-.484.032l-.378.48a.418.418 0 0 0 .036.54l1.32 1.267a.32.32 0 0 0 .484-.034l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.88a.32.32 0 0 1-.484.032L1.892 7.77a.366.366 0 0 0-.516.005l-.423.433a.364.364 0 0 0 .006.514l3.255 3.185a.32.32 0 0 0 .484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z" fill="#4fc3f7" /></svg></span>
                             </span>
                         </div>
-                        <div style={{width:"100%",position:"relative",display:"flex",alignItems:"center"}} >
+                        <div style={{ width: "100%", position: "relative", display: "flex", alignItems: "center" }} >
                             <div className="circleSender" >
                                 PB
                             </div>
                             <div class="message received">
-                            Halo frands.Halo frands.Halo frands.Halo frands.Halo frands.Halo frands.Halo frands.Halo frands.Halo frands.Halo frands.
+                                Halo frands.Halo frands.Halo frands.Halo frands.Halo frands.Halo frands.Halo frands.Halo frands.Halo frands.Halo frands.
                             <span class="metadata" ><span class="time">9:03 pm</span></span>
                             </div>
                         </div>
@@ -82,22 +119,7 @@ export default class ContactBar extends Component {
                                 <span class="time">9:04 pm</span><span class="tick"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" id="msg-dblcheck-ack" x="2063" y="2076"><path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.88a.32.32 0 0 1-.484.032l-.358-.325a.32.32 0 0 0-.484.032l-.378.48a.418.418 0 0 0 .036.54l1.32 1.267a.32.32 0 0 0 .484-.034l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.88a.32.32 0 0 1-.484.032L1.892 7.77a.366.366 0 0 0-.516.005l-.423.433a.364.364 0 0 0 .006.514l3.255 3.185a.32.32 0 0 0 .484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z" fill="#4fc3f7" /></svg></span>
                             </span>
                         </div>
-                        <div style={{width:"100%",position:"relative",display:"flex",alignItems:"center"}} >
-                            <div className="circleSender" >
-                                PB
-                            </div>
-                            <div class="message received">
-                                Halo Frands.
-                            <span class="metadata" ><span class="time">9:03 pm</span></span>
-                            </div>
-                        </div>
-                        <div class="message sent">
-                            Chai pilo.
-                            <span class="metadata">
-                                <span class="time">9:04 pm</span><span class="tick"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" id="msg-dblcheck-ack" x="2063" y="2076"><path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.88a.32.32 0 0 1-.484.032l-.358-.325a.32.32 0 0 0-.484.032l-.378.48a.418.418 0 0 0 .036.54l1.32 1.267a.32.32 0 0 0 .484-.034l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.88a.32.32 0 0 1-.484.032L1.892 7.77a.366.366 0 0 0-.516.005l-.423.433a.364.364 0 0 0 .006.514l3.255 3.185a.32.32 0 0 0 .484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z" fill="#4fc3f7" /></svg></span>
-                            </span>
-                        </div>
-                        <div style={{width:"100%",position:"relative",display:"flex",alignItems:"center"}} >
+                        <div style={{ width: "100%", position: "relative", display: "flex", alignItems: "center" }} >
                             <div className="circleSender" >
                                 PB
                             </div>
@@ -112,7 +134,7 @@ export default class ContactBar extends Component {
                                 <span class="time">9:04 pm</span><span class="tick"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" id="msg-dblcheck-ack" x="2063" y="2076"><path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.88a.32.32 0 0 1-.484.032l-.358-.325a.32.32 0 0 0-.484.032l-.378.48a.418.418 0 0 0 .036.54l1.32 1.267a.32.32 0 0 0 .484-.034l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.88a.32.32 0 0 1-.484.032L1.892 7.77a.366.366 0 0 0-.516.005l-.423.433a.364.364 0 0 0 .006.514l3.255 3.185a.32.32 0 0 0 .484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z" fill="#4fc3f7" /></svg></span>
                             </span>
                         </div>
-                        <div style={{width:"100%",position:"relative",display:"flex",alignItems:"center"}} >
+                        <div style={{ width: "100%", position: "relative", display: "flex", alignItems: "center" }} >
                             <div className="circleSender" >
                                 PB
                             </div>
@@ -127,7 +149,7 @@ export default class ContactBar extends Component {
                                 <span class="time">9:04 pm</span><span class="tick"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" id="msg-dblcheck-ack" x="2063" y="2076"><path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.88a.32.32 0 0 1-.484.032l-.358-.325a.32.32 0 0 0-.484.032l-.378.48a.418.418 0 0 0 .036.54l1.32 1.267a.32.32 0 0 0 .484-.034l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.88a.32.32 0 0 1-.484.032L1.892 7.77a.366.366 0 0 0-.516.005l-.423.433a.364.364 0 0 0 .006.514l3.255 3.185a.32.32 0 0 0 .484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z" fill="#4fc3f7" /></svg></span>
                             </span>
                         </div>
-                        <div style={{width:"100%",position:"relative",display:"flex",alignItems:"center"}} >
+                        <div style={{ width: "100%", position: "relative", display: "flex", alignItems: "center" }} >
                             <div className="circleSender" >
                                 PB
                             </div>
@@ -142,7 +164,7 @@ export default class ContactBar extends Component {
                                 <span class="time">9:04 pm</span><span class="tick"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" id="msg-dblcheck-ack" x="2063" y="2076"><path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.88a.32.32 0 0 1-.484.032l-.358-.325a.32.32 0 0 0-.484.032l-.378.48a.418.418 0 0 0 .036.54l1.32 1.267a.32.32 0 0 0 .484-.034l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.88a.32.32 0 0 1-.484.032L1.892 7.77a.366.366 0 0 0-.516.005l-.423.433a.364.364 0 0 0 .006.514l3.255 3.185a.32.32 0 0 0 .484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z" fill="#4fc3f7" /></svg></span>
                             </span>
                         </div>
-                        <div style={{width:"100%",position:"relative",display:"flex",alignItems:"center"}} >
+                        <div style={{ width: "100%", position: "relative", display: "flex", alignItems: "center" }} >
                             <div className="circleSender" >
                                 PB
                             </div>
@@ -157,7 +179,7 @@ export default class ContactBar extends Component {
                                 <span class="time">9:04 pm</span><span class="tick"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" id="msg-dblcheck-ack" x="2063" y="2076"><path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.88a.32.32 0 0 1-.484.032l-.358-.325a.32.32 0 0 0-.484.032l-.378.48a.418.418 0 0 0 .036.54l1.32 1.267a.32.32 0 0 0 .484-.034l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.88a.32.32 0 0 1-.484.032L1.892 7.77a.366.366 0 0 0-.516.005l-.423.433a.364.364 0 0 0 .006.514l3.255 3.185a.32.32 0 0 0 .484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z" fill="#4fc3f7" /></svg></span>
                             </span>
                         </div>
-                        <div style={{width:"100%",position:"relative",display:"flex",alignItems:"center"}} >
+                        <div style={{ width: "100%", position: "relative", display: "flex", alignItems: "center" }} >
                             <div className="circleSender" >
                                 PB
                             </div>
@@ -172,7 +194,7 @@ export default class ContactBar extends Component {
                                 <span class="time">9:04 pm</span><span class="tick"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" id="msg-dblcheck-ack" x="2063" y="2076"><path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.88a.32.32 0 0 1-.484.032l-.358-.325a.32.32 0 0 0-.484.032l-.378.48a.418.418 0 0 0 .036.54l1.32 1.267a.32.32 0 0 0 .484-.034l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.88a.32.32 0 0 1-.484.032L1.892 7.77a.366.366 0 0 0-.516.005l-.423.433a.364.364 0 0 0 .006.514l3.255 3.185a.32.32 0 0 0 .484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z" fill="#4fc3f7" /></svg></span>
                             </span>
                         </div>
-                        <div style={{width:"100%",position:"relative",display:"flex",alignItems:"center"}} >
+                        <div style={{ width: "100%", position: "relative", display: "flex", alignItems: "center" }} >
                             <div className="circleSender" >
                                 PB
                             </div>
@@ -187,7 +209,7 @@ export default class ContactBar extends Component {
                                 <span class="time">9:04 pm</span><span class="tick"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" id="msg-dblcheck-ack" x="2063" y="2076"><path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.88a.32.32 0 0 1-.484.032l-.358-.325a.32.32 0 0 0-.484.032l-.378.48a.418.418 0 0 0 .036.54l1.32 1.267a.32.32 0 0 0 .484-.034l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.88a.32.32 0 0 1-.484.032L1.892 7.77a.366.366 0 0 0-.516.005l-.423.433a.364.364 0 0 0 .006.514l3.255 3.185a.32.32 0 0 0 .484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z" fill="#4fc3f7" /></svg></span>
                             </span>
                         </div>
-                        <div style={{width:"100%",position:"relative",display:"flex",alignItems:"center"}} >
+                        <div style={{ width: "100%", position: "relative", display: "flex", alignItems: "center" }} >
                             <div className="circleSender" >
                                 PB
                             </div>
@@ -202,7 +224,7 @@ export default class ContactBar extends Component {
                                 <span class="time">9:04 pm</span><span class="tick"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" id="msg-dblcheck-ack" x="2063" y="2076"><path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.88a.32.32 0 0 1-.484.032l-.358-.325a.32.32 0 0 0-.484.032l-.378.48a.418.418 0 0 0 .036.54l1.32 1.267a.32.32 0 0 0 .484-.034l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.88a.32.32 0 0 1-.484.032L1.892 7.77a.366.366 0 0 0-.516.005l-.423.433a.364.364 0 0 0 .006.514l3.255 3.185a.32.32 0 0 0 .484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z" fill="#4fc3f7" /></svg></span>
                             </span>
                         </div>
-                        <div style={{width:"100%",position:"relative",display:"flex",alignItems:"center"}} >
+                        <div style={{ width: "100%", position: "relative", display: "flex", alignItems: "center" }} >
                             <div className="circleSender" >
                                 PB
                             </div>
@@ -217,7 +239,7 @@ export default class ContactBar extends Component {
                                 <span class="time">9:04 pm</span><span class="tick"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" id="msg-dblcheck-ack" x="2063" y="2076"><path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.88a.32.32 0 0 1-.484.032l-.358-.325a.32.32 0 0 0-.484.032l-.378.48a.418.418 0 0 0 .036.54l1.32 1.267a.32.32 0 0 0 .484-.034l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.88a.32.32 0 0 1-.484.032L1.892 7.77a.366.366 0 0 0-.516.005l-.423.433a.364.364 0 0 0 .006.514l3.255 3.185a.32.32 0 0 0 .484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z" fill="#4fc3f7" /></svg></span>
                             </span>
                         </div>
-                        <div style={{width:"100%",position:"relative",display:"flex",alignItems:"center"}} >
+                        <div style={{ width: "100%", position: "relative", display: "flex", alignItems: "center" }} >
                             <div className="circleSender" >
                                 PB
                             </div>
@@ -232,6 +254,22 @@ export default class ContactBar extends Component {
                                 <span class="time">9:04 pm</span><span class="tick"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" id="msg-dblcheck-ack" x="2063" y="2076"><path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.88a.32.32 0 0 1-.484.032l-.358-.325a.32.32 0 0 0-.484.032l-.378.48a.418.418 0 0 0 .036.54l1.32 1.267a.32.32 0 0 0 .484-.034l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.88a.32.32 0 0 1-.484.032L1.892 7.77a.366.366 0 0 0-.516.005l-.423.433a.364.364 0 0 0 .006.514l3.255 3.185a.32.32 0 0 0 .484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z" fill="#4fc3f7" /></svg></span>
                             </span>
                         </div>
+                        <div style={{ width: "100%", position: "relative", display: "flex", alignItems: "center" }} >
+                            <div className="circleSender" >
+                                PB
+                            </div>
+                            <div class="message received">
+                                Halo Frands.
+                            <span class="metadata" ><span class="time">9:03 pm</span></span>
+                            </div>
+                        </div>
+                        <div class="message sent">
+                            Chai pilo.
+                            <span class="metadata">
+                                <span class="time">9:04 pm</span><span class="tick"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" id="msg-dblcheck-ack" x="2063" y="2076"><path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.88a.32.32 0 0 1-.484.032l-.358-.325a.32.32 0 0 0-.484.032l-.378.48a.418.418 0 0 0 .036.54l1.32 1.267a.32.32 0 0 0 .484-.034l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.88a.32.32 0 0 1-.484.032L1.892 7.77a.366.366 0 0 0-.516.005l-.423.433a.364.364 0 0 0 .006.514l3.255 3.185a.32.32 0 0 0 .484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z" fill="#4fc3f7" /></svg></span>
+                            </span>
+                        </div>
+                        {this.allMessages()}
                     </div>
                 </div>
                 <form className="typer" onSubmit={(e) => { this.messager(e) }} >

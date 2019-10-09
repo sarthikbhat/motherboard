@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import './Login.scss';
 import { TextField, FormControlLabel, Checkbox } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import { connect } from "react-redux";
+
 import { instance } from '../../App';
+import './Login.scss';
+import { userLogIn } from '../../reduxStates/actions/index'
 
 const initstate = {
   name: '',
@@ -67,8 +70,9 @@ class Login extends Component {
         // window.location.reload()
       } else {
         console.log('hayo rabba');
+        window.location.href = "/"
+        this.props.onUserLogIn('rada')
         localStorage.setItem('mBKey', res.data.data.accessToken);
-        window.location.href="/"
       }
       console.log('success');
       // var form = document.getElementById("myform");
@@ -158,4 +162,10 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onUserLogIn: (userID) => dispatch(userLogIn(userID))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Login);

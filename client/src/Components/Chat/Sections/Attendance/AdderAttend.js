@@ -75,7 +75,7 @@ class AdderAttend extends Component {
 
   handleChange = name => event => {
     this.setState({ [name]: event.target.checked });
-    console.log(this.state);
+    console.log(this.props.subjectV);
   };
 
   createData = (sapid, fname, lname) => {

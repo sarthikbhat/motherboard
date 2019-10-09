@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import './AttendanceAdd.scss';
 import Forum from '@material-ui/icons/Forum';
-import ContactBar from './ContactBar/ContactBar';
+import AttendContact from './AttendContact/AttendContact';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import AdderAttend from './Attendance/AdderAttend';
+
+var subjectValue='';
 
 export default class AttendanceAdd extends Component {
   constructor(props) {
     super(props);
-    this.state = { width: 0, height: 0, openContactBar: false };
+    this.state = { width: 0, height: 0, openContactBar: false ,subject:''};
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
 
@@ -36,16 +38,21 @@ export default class AttendanceAdd extends Component {
       }
     );
   };
+
+  getSubject = subject => {
+    this.setState({subject})
+  };
+
   render() {
     var listStud = this.state.openContactBar ? 'listStud show' : 'listStud';
     return (
       <div id="chatBody">
         <div id="chatSect">
-          <AdderAttend/>
+          <AdderAttend subjectV={this.state.subject} />
           {console.log('hello')}
         </div>
         <div className={listStud}>
-          {this.state.openContactBar ? <ContactBar /> : null}
+          {this.state.openContactBar ? <AttendContact /> : null}
           {this.state.width <= 600 ? (
             <button
               style={{
@@ -63,7 +70,7 @@ export default class AttendanceAdd extends Component {
               <Forum />
             </button>
           ) : (
-            <ContactBar />
+            <AttendContact subject={this.getSubject} />
           )}
         </div>
         {this.state.openContactBar === true ? (

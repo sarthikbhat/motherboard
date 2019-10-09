@@ -12,7 +12,7 @@ export default class Navigator extends Component {
               <h3>Chats</h3>
             </Link>
             <Link to="/grievances" className="content" id="grievances">
-              <h3>Girevances</h3>
+              <h3>Grievances</h3>
             </Link>
             <Link to="/responses" className="content" id="responses">
               <h3>Responses</h3>
@@ -22,6 +22,12 @@ export default class Navigator extends Component {
             </Link>
             <Link to="/events" className="content" id="events">
               <h3>Events/Calander</h3>
+            </Link>
+            <Link to="/attendance" className="content" id="attendance">
+              <h3>Attendance</h3>
+            </Link>
+            <Link to="/attendanceadd" className="content" id="attendance">
+              <h3>Attendance Add</h3>
             </Link>
           </div>
         </div>

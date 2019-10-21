@@ -12,7 +12,7 @@ module.exports = class Grievance {
     let {results} = await db.query(sql);
     return results;
   }
-  async solvingGrievance(){
+  static async solvingGrievance(grievanceId,response){
     var sql = "UPDATE grievances SET response = "+db.escape(response)+", isSolved = 1 WHERE id = "+db.escape(grievanceId);
     console.log(sql);
     let {results} = await db.query(sql);

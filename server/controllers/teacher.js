@@ -18,36 +18,47 @@ exports.postAddTeacher = async (req, res, next) => {
   await user.save(); 
   const teacher = new Teacher(sap_id, designation, mentor, class_teacher, salary);
   await teacher.save();
-  res.redirect('/teacher');
+  return res.status(200).json({message:"Teacher added successfuly"});
 };
-exports.postDeleteTeacher = (req, res, next) => {
-  const sap_id = req.body.sap_id;
-  User.deleteBysap_id(sap_id);
-  Teacher.deleteBysap_id(sap_id);
-  res.redirect('/teacher');
+exports.postDeleteTeacher = async (req, res, next) => {
+  let sap_id = req.body.sap_id;
+  await User.deleteBysap_id(sap_id);
+  await Teacher.deleteBysap_id(sap_id);
+  res.status(200).json({message:`Teacher deleted with sap_id ${sap_id}`});
 };
-exports.postFetchTeachers = (req, res, next) => {
-  Teacher.fetchAll(function(err,rows){
-    if(err) throw err;
-    console.log(rows);
-  });
-  res.redirect('/teacher');
+
+exports.postFetchTeachers = async (req, res, next) => {
+  var rows =[];
+  try{
+      rows = await Teacher.fetchAll();
+  }catch(e){
+      console.log(e);
+  }
+  return res.status(200).json({teachers:rows});
 };
-exports.postFetchBySapId = (req, res, next) => {
-  const sap_id = req.body.sap_id;
-  Teacher.findBysap_id(sap_id,function(err,rows){
-    if(err) throw err;
-    console.log(rows);
-  });
-  res.redirect('/teacher');
+exports.postFetchBySapId = async (req, res, next) => {
+  // const sap_id = req.body.sap_id;
+  // const rows = await Teacher.findBysap_id(sap_id);
+  // return res.status(200).json({teacher:rows});
+  var rows = [];
+    const sap_id =req.body.sap_id;
+    try{
+         rows = await Teacher.findBysap_id(sap_id);
+    }catch(e){
+        console.log(e);
+    }
+    console.log(rows)
+    res.status(200).json({teacher:rows});
 };
-exports.postGenerateList = (req, res, next) => {
+exports.postGenerateList = async (req, res, next) => {
   const semester = req.body.semester;
   const division = req.body.division;
-  Teacher.GenerateList(semester,division,function(err,rows){
-    if(err) throw err;
-    res.render('take-attendance',{
-      students:rows
-    })
-  });
+  // Teacher.GenerateList(semester,division,function(err,rows){
+  //   if(err) throw err;
+  //   res.render('take-attendance',{
+  //     students:rows
+  //   })
+  // });
+  const rows = await Teacher.GenerateList(semester,division);
+  return res.satus(200).json({students:rows});
 };

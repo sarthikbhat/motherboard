@@ -9,33 +9,30 @@ exports.postAddGrievance = async (req,res,next)=>{
     const grievance = new Grievance(sap_id, problem, description);
     const rows = await grievance.save();
         //sending  in the grievance ID
-            // res.render('somepage',{
-            //     grievanceId:rows.insertId
-            // });
+        return res.status(200).json({
+                grievanceId:rows.insertId
+            });
 };
 exports.postSolveGrievance = async (req,res,next)=>{
     var grievanceId = req.body.grievanceId;
     var response = req.body.response;
     // var grievanceId = "875153";
     // var response = "problem des";
+    await Grievance.solvingGrievance(grievanceId,response);
+    res.status(200).json({ message:"Response recorded successfully."})
 
-    const rows = await Grievance.solvingGrievance(grievanceId,response);
-        // sending  the pending grievances
-            // res.render('somepage',{
-            //     grievances:rows
-            // });
 };
 exports.postPendingGrievances = async (req,res,next)=>{
     const rows = await Grievance.pendingGrievances();
         // sending  the pending grievances
-            // res.render('somepage',{
-            //     grievances:rows
-            // });
+        return res.status(200).json({
+                grievances:rows
+            });
 };
 exports.postSolvedGrievances = async (req,res,next)=>{
     const rows = await Grievance.solvedGrievances();
         // sending  the solved grievances
-            // res.render('somepage',{
-            //     grievances:rows
-            // });
+        return res.status(200).json({
+            grievances:rows
+        });
 };

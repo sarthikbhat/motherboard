@@ -23,14 +23,22 @@ module.exports = class Teacher {
     return results;
   }
   
-  static async  fetchAll() {
-    var query = "SELECT * FROM teachers";
-    let results = await db.query(query);
-    return results;
-  };
+  static async fetchAll() {
+    var sql = "SELECT * FROM users NATURAL JOIN teachers";
+    try{
+      let results = {};
+      results = await (db.query(sql,{type:Sequelize.QueryTypes.SELECT})) ;
+      console.log(results);
+      return results;
+    }catch(e){
+      return e;
+    }
+  }
   
   static async findBysap_id(sap_id) {
-    let results = await db.query('SELECT * FROM users NATURAL JOIN teachers WHERE sap_id = '+db.escape(sap_id));
+    sap_id = parseInt(sap_id,10);
+    var sql = 'SELECT * FROM users NATURAL JOIN teachers WHERE sap_id = '+db.escape(sap_id);
+    let results = await db.query(sql,{type:Sequelize.QueryTypes.SELECT});
     return results;
   }
   

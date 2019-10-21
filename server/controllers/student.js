@@ -14,18 +14,16 @@ exports.postAddStudent = async (req, res, next) => {
     const phone_no = req.body.phone_no;
     const year_of_joining = req.body.year_of_joining;
     const user = new User(sap_id,email_id,password,address,phone_no,year_of_joining,fname,lname);
-    const results = await user.save();
-    console.log(results); 
+    await user.save();
     const student = new Student(sap_id, division, batch, semester);
-    const rows = await student.save();
-    console.log(rows); 
-    res.redirect('/student');
+    await student.save();
+    return res.status(200).json({message:"Student added successfuly"});
 };
 exports.postDeleteStudent = async (req, res, next) => {
-    const sap_id = req.body.sap_id;
-    const user = User.deleteBysap_id(sap_id);
-    const student = Student.deleteBysap_id(sap_id);
-    res.redirect('/student');
+    let sap_id = req.body.sap_id;
+    await User.deleteBysap_id(sap_id);
+    await Student.deleteBysap_id(sap_id);
+    res.status(200).json({message:`Student deleted with sap_id ${sap_id}`});
 };
 exports.postFetchStudents = async (req, res, next) => {
     var rows =[];
@@ -34,7 +32,7 @@ exports.postFetchStudents = async (req, res, next) => {
     }catch(e){
         console.log(e);
     }
-    console.log(rows);
+    return res.status(200).json({students:rows});
 };
 exports.postFetchBySapId = async (req, res, next) => {
     var rows = [];
@@ -45,5 +43,5 @@ exports.postFetchBySapId = async (req, res, next) => {
         console.log(e);
     }
     console.log(rows)
-
+    res.status(200).json({student:rows});
 };

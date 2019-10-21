@@ -18,20 +18,20 @@ module.exports = class User {
     return results;
   }
   
-  async  deleteBysap_id(sap_id) {
-    const sap_id = parseInt(id,10);
-    var sql = "DELETE FROM users WHERE sap_id = "+db.escape(sap_id);
+  static async  deleteBysap_id(sap_id) {
+    const  id = parseInt(sap_id,10);
+    var sql = "DELETE FROM users WHERE sap_id = "+db.escape(id);
     console.log(sql);
     let results = await db.query(sql);
     return results;
   }
   
-  async  fetchAll() {
+  static async fetchAll() {
     let results = await db.query('SELECT * FROM users');
     return results;
   }
   
-  async findBysap_id(sap_id) {
+  static async findBysap_id(sap_id) {
     var sql = "SELECT * FROM users WHERE sap_id = "+db.escape(sap_id);
     console.log(sql);
     let results = await db.query(sql);

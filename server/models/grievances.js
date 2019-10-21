@@ -6,28 +6,28 @@ module.exports = class Grievance {
     this.grievance = grievance;
     this.description = description;
   }
-  save(cb){
+  async save(){
     var sql = "INSERT INTO grievances(sap_id, grievance, description) VALUES ("+db.escape(this.sap_id)+","+db.escape(this.grievance)+","+db.escape(this.description)+")";
     console.log(sql);
     let {results} = await db.query(sql);
     return results;
   }
-  static solvingGrievance(cb){
+  async solvingGrievance(){
     var sql = "UPDATE grievances SET response = "+db.escape(response)+", isSolved = 1 WHERE id = "+db.escape(grievanceId);
     console.log(sql);
     let {results} = await db.query(sql);
     return results;
   }
-  static pendingGrievances(cb){
+  static async pendingGrievances(){
     var sql = "SELECT *  FROM grievances WHERE isSolved = 0 ORDER BY id";
     console.log(sql);
-    let {results} = await db.query(sql);
+    let results = await db.query(sql);
     return results;
   }
-  static solvedGrievances(cb){
+  static async solvedGrievances(){
     var sql = "SELECT *  FROM grievances WHERE isSolved = 1 ORDER BY id";
     console.log(sql);
-    let {results} = await db.query(sql);
+    let results = await db.query(sql);
     return results;
   }     
 };

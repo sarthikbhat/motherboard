@@ -22,7 +22,7 @@
     "mongoose-timestamp": "^0.6.0",
     "mysql2": "^1.6.5",
     "sendgrid": "^5.2.3",
-    "sequelize": "^5.19.3",
+    "sequelize": "^5.19.4",
     "socket.io": "^2.2.0",
     "subscriptions-transport-ws": "^0.9.16",
     "twilio": "^3.33.2"

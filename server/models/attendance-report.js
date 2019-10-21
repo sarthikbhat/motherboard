@@ -4,14 +4,14 @@ module.exports = class Report{
     async  getAttendance(){
         var sql = "SELECT *  FROM attendance  WHERE sap_id IN (SELECT sap_id FROM students)";
         console.log(sql);
-        let {results} = await db.query(sql);
+        let results = await db.query(sql);
         return results;
     }
     async  totalLectures(subject){
         if(subject == "sub1"){
             var sql = "SELECT * FROM lectures";
             console.log(sql);
-            let {results} = await db.query(sql);
+            let results = await db.query(sql);
             return results;
         }
     }

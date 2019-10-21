@@ -54,7 +54,9 @@ exports.genReport = async (req,res) =>{
         element.sub5 = (element.sub5/countSub5)*100;
         element.sub6 = (element.sub6/countSub6)*100;
     });
-    res.render('attendance-report',{
-        students:rows  
-    });
+    // res.render('attendance-report',{
+    //     students:rows  
+    // });
+    console.log(rows);
+    res.status(200).json({ students:rows });
 };

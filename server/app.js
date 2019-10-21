@@ -49,5 +49,5 @@ app.post('/generate-list',Routes);
 
 app.post('/att-report',Routes);
 
-
+app.post('/postAttendance',Routes);
 app.listen(3000);

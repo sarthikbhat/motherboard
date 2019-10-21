@@ -5,6 +5,7 @@ const teacherController = require('../controllers/teacher');
 const studentController = require('../controllers/student');
 const reportController = require('../controllers/attendance-report');
 const grievanceController = require('../controllers/grievances');
+const attendanceController = require('../controllers/attendance');
 
 const router = express.Router();
 
@@ -20,5 +21,6 @@ router.post('/find-student',studentController.postFetchBySapId);
 
 router.post('/add-grievances',grievanceController.postAddGrievance);
 router.post('/att-report',reportController.genReport);
+router.post('/postAttendance',attendanceController.postAttendance);
 
 module.exports = router;

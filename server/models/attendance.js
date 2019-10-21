@@ -1,9 +1,8 @@
 const db = require('../util/database');
 
 module.exports = class Attendance {
-  constructor(sap_id, attendance ,subject) {
+  constructor(sap_id,subject) {
     this.sap_id = parseInt(sap_id,10);
-    this.attendance = attendance;
     this.subject = subject;
   }
   async present(){
@@ -88,7 +87,7 @@ module.exports = class Attendance {
       return results;
     }
   }
-  async static lecturesTaken(subject,cb){
+  static async  lecturesTaken(subject,cb){
     if(subject == 'sub1'){
       let results = await db.query("UPDATE lectures SET sub1 = sub1 + 1");
       return results;

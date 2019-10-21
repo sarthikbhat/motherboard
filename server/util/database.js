@@ -15,7 +15,8 @@ const Sequelize = require('sequelize');
 // Option 1: Passing parameters separately
 const sequelize = new Sequelize('mentorship_forum', 'root', '', {
   host: 'localhost',
-  dialect: 'mysql'
+  dialect: 'mysql',
+  logging:false
 });
 
 sequelize

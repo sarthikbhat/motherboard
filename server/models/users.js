@@ -1,9 +1,12 @@
 const db = require("../util/database.js");
+const  { hashSync, compareSync } = require('bcrypt-nodejs');
+const jwt=require('jsonwebtoken');
+const Sequelize = require('sequelize');
 module.exports = class User {
-  constructor(sap_id, email_id, password,address,phone_no,year_of_joining,fname,lname) {
+  constructor(sap_id, email_id,address,phone_no,year_of_joining,fname,lname) {
     this.sap_id = parseInt(sap_id,10);
     this.email_id = email_id;
-    this.password = password;
+    this.password = "pass@123";
     this.address = address;
     this.phone_no = parseInt(phone_no,10);
     this.year_of_joining = year_of_joining;
@@ -36,6 +39,28 @@ module.exports = class User {
     console.log(sql);
     let results = await db.query(sql);
     return results;
+  }
+  
+  static async authenticateUser(sap_id,password){
+    var sql = "SELECT * FROM users WHERE sap_id = "+db.escape(sap_id);
+    console.log(sql)
+    let results = await db.query(sql,{ type: Sequelize.QueryTypes.SELECT });
+    const user = results[0];
+    console.log(user.sap_id); 
+    if(user){
+      // if(compareSync(password,user.password)){
+      if(password = user.password){
+        var token=jwt.sign({userId:user.sap_id},"secret");
+        user.accessToken = token;
+        console.log(user)
+        return user;
+      }else{
+          console.log("Password doesn't match");
+          throw "Password";
+      }
+    }else{
+
+    }
   }
 };
   

@@ -10,11 +10,10 @@ exports.postAddTeacher = async (req, res, next) => {
   const fname = req.body.fname;
   const lname =req.body.lname;
   const email_id = req.body.email_id;
-  const password = req.body.password;
   const address = req.body.address;
   const phone_no = req.body.phone_no;
   const year_of_joining = req.body.year_of_joining;
-  const user = new User(sap_id,email_id,password,address,phone_no,year_of_joining,fname,lname);
+  const user = new User(sap_id,email_id,address,phone_no,year_of_joining,fname,lname);
   await user.save(); 
   const teacher = new Teacher(sap_id, designation, mentor, class_teacher, salary);
   await teacher.save();

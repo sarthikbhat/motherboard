@@ -6,8 +6,28 @@ const studentController = require('../controllers/student');
 const reportController = require('../controllers/attendance-report');
 const grievanceController = require('../controllers/grievances');
 const attendanceController = require('../controllers/attendance');
-
+const UserController = require('../controllers/user');
 const router = express.Router();
+
+router.get('/',(req,res)=>{
+    res.render('index');
+});
+router.get('/teacher',(req,res)=>{
+    res.render('teacher');
+});
+router.get('/student',(req,res)=>{
+    res.render('student');
+});
+router.get('/take-attendance',(req,res)=>{
+    res.render('take-attendance',{
+        students:[]
+    })
+});
+router.get('/attendance-report',(req,res)=>{
+    res.render('attendance-report',{
+        students:[]
+    })
+});
 
 router.post('/add-teacher', teacherController.postAddTeacher);
 router.post('/delete-teacher', teacherController.postDeleteTeacher);
@@ -23,4 +43,5 @@ router.post('/add-grievances',grievanceController.postAddGrievance);
 router.post('/att-report',reportController.genReport);
 router.post('/postAttendance',attendanceController.postAttendance);
 
+router.post('/login',UserController.login);
 module.exports = router;

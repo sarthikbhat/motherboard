@@ -12,9 +12,11 @@ module.exports = class User {
     this.year_of_joining = year_of_joining;
     this.fname =fname;
     this.lname =lname;
+    this.otp=null;
+    this.otpVerified="";
   }
   async save() {
-    var sql = "INSERT INTO users(sap_id, email_id, password, address, phone_no, year_of_joining,fname,lname) VALUES ("+db.escape(this.sap_id)+","+db.escape(this.email_id)+","+db.escape(this.password)+","+db.escape(this.address)+","+db.escape(this.phone_no)+","+db.escape(this.year_of_joining)+","+db.escape(this.fname)+","+db.escape(this.lname)+")";
+    var sql = "INSERT INTO users(sap_id, email_id, password, address, phone_no, year_of_joining,fname,lname,otp,optVerified) VALUES ("+db.escape(this.sap_id)+","+db.escape(this.email_id)+","+db.escape(this.password)+","+db.escape(this.address)+","+db.escape(this.phone_no)+","+db.escape(this.year_of_joining)+","+db.escape(this.fname)+","+db.escape(this.lname)+","+db.escape(this.otp)+","+db.escape(this.otpVerified)+")";
     console.log(sql);
     let results = await db.query(sql);
     console.log({results});
@@ -52,15 +54,20 @@ module.exports = class User {
       if(password = user.password){
         var token=jwt.sign({userId:user.sap_id},"secret");
         user.accessToken = token;
-        console.log(user)
+        console.log(user);
         return user;
       }else{
-          console.log("Password doesn't match");
-          throw "Password";
+          throw "Password  doesn't match";
       }
     }else{
-
+      throw "User doesn't exists."
     }
+  }
+  static async addOtp(sap_id,OTP){
+    var sql = "UPDATE users SET otp = "+db.escape(OTP)+" WHERE sap_id = "+db.escape(sap_id);
+    console.log(sql)
+    let results = await db.query(sql,{ type: Sequelize.QueryTypes.SELECT });
+    return results;
   }
 };
   

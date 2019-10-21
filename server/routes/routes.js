@@ -7,6 +7,7 @@ const reportController = require('../controllers/attendance-report');
 const grievanceController = require('../controllers/grievances');
 const attendanceController = require('../controllers/attendance');
 const UserController = require('../controllers/user');
+const {verify} = require('../auth/auth');
 const router = express.Router();
 
 router.get('/',(req,res)=>{
@@ -44,4 +45,13 @@ router.post('/att-report',reportController.genReport);
 router.post('/postAttendance',attendanceController.postAttendance);
 
 router.post('/login',UserController.login);
+router.get('/check/verification',
+    verify,
+    (req,res,next)=>{
+        console.log(req.userId);
+        res.status(200).json({message:"Success"});
+    }
+);
+router.post('/send/otp',UserController.sendOTP);
+// router.post('/otp/verify',UserController.verifyOTP);
 module.exports = router;

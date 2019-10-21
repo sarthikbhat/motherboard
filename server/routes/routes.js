@@ -53,5 +53,6 @@ router.get('/check/verification',
     }
 );
 router.post('/send/otp',UserController.sendOTP);
-// router.post('/otp/verify',UserController.verifyOTP);
+router.post('/otp/verify',UserController.verifyOTP);
+router.post('/password/change',UserController.changePassword);
 module.exports = router;

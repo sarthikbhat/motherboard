@@ -1,6 +1,4 @@
 const User = require('../models/users');
-const Teacher = require('../models/teacher');
-const Student = require('../models/student');
 const {sendEmail} = require('../config/sendgrid');
 const {sendOTPMessage} = require('../config/twilio');
 async function generateOTP() {  
@@ -32,8 +30,9 @@ async function sendOTPviaEmail(sap_id){
     }
 }
 async function sendOTPviaPhoneNo(sap_id){
-    let user = await User.findBysap_id(sap_id);
-    if(user.length > 0 ){
+    let users = await User.findBysap_id(sap_id);
+    if(users.length > 0 ){
+        var user = users[0];
         let OTP = await generateOTP();
         console.log("OTP>>",OTP);
         await User.addOtp(user.sap_id,OTP);
@@ -68,7 +67,32 @@ exports.sendOTP = async (req,res)=>{
             await sendOTPviaPhoneNo(sap_id);
         }
     }catch(err){
-        res.status(500).json({error:err})
+        return res.status(500).json({error:err})
     }
-
+};
+exports.verifyOTP = async (req,res)=>{
+    try{
+        const {sap_id,otp} = req.body;
+        let result = await User.verifyOTP(sap_id,otp);
+        if(result){
+            return res.success("OTP Verified!!");
+        }else{
+            throw "Cant verify otp";
+        }
+    }catch(e){
+        return res.status(500).json({error:err})
+    }
+};
+exports.changePassword = async (req,res)=>{
+    try{
+        var { password,confirmPassword,sap_id } = req.body;
+        if(password === confirmPassword){
+            await UserModel.changePassword(body);
+            return res.success("Password Change Successfull");
+        }else{
+            return res.error("Password And Confirm Password should Match");
+        }
+    }catch(e){
+        return res.error(e);
+    }
 };

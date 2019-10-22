@@ -45,14 +45,15 @@ class Community extends Component {
               <Grid item xs={4} sm={4} md={4} style={{ height: '100%' }}></Grid>
             </Grid>
           </Grid>
-                <Grid container spacing={32} >
-                  <Grid item xs={12}>
-                    <Grid container spacing={32}>
+          <Grid container spacing={32} >
+          <div id="communityOuterBox">
+                  <Grid item xs={12} id="communityOuterBox" >
+                    <Grid container spacing={32} id="community" style={{ height: window.innerHeight - 152 }}>
                     {
             this.state.results.map(elm=>{
               return(
                       <Grid item xs={12} sm={12} md={12} style={{paddingBottom:'20px'}}>
-                        <div className="details">
+                        <div className="details" style={{padding:'10px'}}>
                           <div className="headDet"> <u>Grievance</u>: {elm.grievance}</div>
                           <div className="det"> <u>Grievance ID</u>: {elm.id}</div>
                           <div className="det"><u>Grievance Details</u>: {elm.description}</div>
@@ -65,6 +66,7 @@ class Community extends Component {
           }
                     </Grid>
                   </Grid>
+                </div>
                 </Grid>
         </Grid>
       </div>

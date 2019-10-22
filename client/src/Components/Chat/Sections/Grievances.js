@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import './grievances.scss'  ;
 import { TextField, Typography } from '@material-ui/core';
-import { MuiThemeProvider, withTheme } from '@material-ui/core/styles';
+import { MuiThemeProvider, withTheme ,makeStyles, withStyles} from '@material-ui/core/styles';
 import { Link, withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import withMobileDialog from '@material-ui/core/withMobileDialog';
 import {theme} from '../../theme';
 import { instance } from '../../../App'
 
@@ -14,8 +22,19 @@ const initstate = {
   problemerr: false,
   descriptionerr: false,
   img: '',
-  imagePreviewUrl: ''
+  imagePreviewUrl: '',
+  open: false,
 };
+
+const styles = Theme => ({
+  popUp: {
+    left: '50%',
+    [Theme.breakpoints.down('sm')]:{
+      left: '0'
+    }
+  },
+});
+
 
 class Grievances extends Component {
   state = initstate;
@@ -25,6 +44,14 @@ class Grievances extends Component {
       [field]: e.target.value
     });
     console.log(this.state);
+  };
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
   };
 
   validate = () => {
@@ -53,14 +80,14 @@ class Grievances extends Component {
     e.preventDefault();
     const valid = this.validate();
     if (valid) {
+      var form = document.getElementById("myform");
+      form.reset();
       const res=await instance.post("/add-grievances",{sap_id:this.state.sap,grievance:this.state.problem,description:this.state.description})
       console.log(res);
-      console.log('success');
-      // var form = document.getElementById("myform");
-      // form.reset();
-      // this.setState({
-      //     initstate
-      // });
+      this.setState({initstate})
+      if(res.status==200){
+          this.setState({ open: true });
+      }
     }
   };
 
@@ -101,6 +128,7 @@ class Grievances extends Component {
   };
 
   render() {
+    const {classes}=this.props;
     return (
       <MuiThemeProvider theme={theme}>
       <div className="login">
@@ -192,9 +220,27 @@ class Grievances extends Component {
           </div>
         </div>
       </div>
+      <div>
+          <Dialog
+          open={this.state.open}
+          onClose={this.handleClose}
+          aria-labelledby="responsive-dialog-title"
+        >
+          <DialogContent className={classes.popUp}>
+            <DialogContentText>
+              Sucessfully Submitted your Grievance.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClose} color="primary" autoFocus>
+              Close
+            </Button>
+          </DialogActions>
+        </Dialog>
+          </div> 
       </MuiThemeProvider>
     );
   }
 }
 
-export default withTheme(Grievances);
+export default withTheme((withStyles(styles)(Grievances)));

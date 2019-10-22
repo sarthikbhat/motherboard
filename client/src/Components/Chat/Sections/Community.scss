@@ -35,6 +35,21 @@
   background: #e3e5eb;
 }
 
+// #communityOuterBox{
+//   overflow-y: scroll;
+// }
+
+// #communityOuterBox::-webkit-scrollbar {
+//   width: 0 !important;
+// }
+#community{
+  overflow-y: scroll;
+}
+
+#community::-webkit-scrollbar {
+  width: 0 !important;
+}
+
 .det {
   padding: 10px;
   font-size: 1.2rem;
@@ -56,12 +71,6 @@
   position: relative;
 }
 
-.details:hover {
-  .hover {
-    display: flex;
-  }
-  // background-color: rgba(0,0,0,0.8);
-}
 
 @media (max-width:950px){
 .outer{

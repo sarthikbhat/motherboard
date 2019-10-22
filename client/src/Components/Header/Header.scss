@@ -21,11 +21,12 @@
     .logoAligner{
         height:100%;
         display:flex;
-        flex-direction: column;
+        // flex-direction: row;
         .centralizer{
             flex:1;
         }
         .logo{
+            padding:10px;
             text-decoration: none;
             color:#707070;
             font-weight: 700;
@@ -36,10 +37,22 @@
         }
     }
 }
+.left{
+    padding:10px;
+    float:right;
+    text-decoration: none;
+    padding-right: 20px;
+    color:#707070;
+    font-weight: 700;
+    font-size:28px;
+}
 @media(max-width:950px){
     .Header{
         .menuIconButton{
             display:flex;
         }
+    }
+    .logoAligner{
+        flex-direction:column;
     }
 }

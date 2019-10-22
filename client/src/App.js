@@ -12,7 +12,7 @@ import Events from './Components/Chat/Sections/Events';
 import Community from './Components/Chat/Sections/Community';
 import Notes from './Components/Chat/Sections/Notes';
 export const instance = axios.create({
-  baseURL: 'http://localhost:5000/',
+  baseURL: 'http://localhost:3000/',
 });
 
 class App extends React.Component {

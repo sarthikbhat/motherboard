@@ -9,7 +9,7 @@ module.exports = class Grievance {
   async save(){
     var sql = "INSERT INTO grievances(sap_id, grievance, description) VALUES ("+db.escape(this.sap_id)+","+db.escape(this.grievance)+","+db.escape(this.description)+")";
     console.log(sql);
-    let {results} = await db.query(sql);
+    const results = await db.query(sql);
     return results;
   }
   static async solvingGrievance(grievanceId,response){

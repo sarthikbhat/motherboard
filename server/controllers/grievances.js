@@ -3,14 +3,12 @@ exports.postAddGrievance = async (req,res,next)=>{
     var sap_id = req.body.sap_id;
     var problem = req.body.grievance;
     var description = req.body.description;
-    // var sap_id = "101";
-    // var problem = "problem";
-    // var description = "problem des";
     const grievance = new Grievance(sap_id, problem, description);
     const rows = await grievance.save();
+    const insertId = rows[0];
         //sending  in the grievance ID
         return res.status(200).json({
-                grievanceId:rows.insertId
+                grievanceId:insertId
             });
 };
 exports.postSolveGrievance = async (req,res,next)=>{

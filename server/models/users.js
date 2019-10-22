@@ -6,17 +6,18 @@ module.exports = class User {
   constructor(sap_id, email_id,address,phone_no,year_of_joining,fname,lname) {
     this.sap_id = parseInt(sap_id,10);
     this.email_id = email_id;
-    this.password = hashsync("pass@123");
+    // this.password = hashSync("pass@123");
+    this.password = "pass@123";
     this.address = address;
     this.phone_no = parseInt(phone_no,10);
     this.year_of_joining = year_of_joining;
     this.fname =fname;
     this.lname =lname;
     this.otp=null;
-    this.otpVerified=0;
+    this.otpVerified=null;
   }
   async save() {
-    var sql = "INSERT INTO users(sap_id, email_id, password, address, phone_no, year_of_joining,fname,lname,otp,optVerified) VALUES ("+db.escape(this.sap_id)+","+db.escape(this.email_id)+","+db.escape(this.password)+","+db.escape(this.address)+","+db.escape(this.phone_no)+","+db.escape(this.year_of_joining)+","+db.escape(this.fname)+","+db.escape(this.lname)+","+db.escape(this.otp)+","+db.escape(this.otpVerified)+")";
+    var sql = "INSERT INTO users(sap_id, email_id, password, address, phone_no, year_of_joining,fname,lname) VALUES ("+db.escape(this.sap_id)+","+db.escape(this.email_id)+","+db.escape(this.password)+","+db.escape(this.address)+","+db.escape(this.phone_no)+","+db.escape(this.year_of_joining)+","+db.escape(this.fname)+","+db.escape(this.lname)+")";
     console.log(sql);
     let results = await db.query(sql);
     console.log({results});

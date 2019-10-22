@@ -3,7 +3,8 @@ import './grievances.scss'  ;
 import { TextField, Typography } from '@material-ui/core';
 import { MuiThemeProvider, withTheme } from '@material-ui/core/styles';
 import { Link, withRouter } from 'react-router-dom';
-import {theme} from '../../theme'
+import {theme} from '../../theme';
+import { instance } from '../../../App'
 
 const initstate = {
   sap: '',
@@ -52,6 +53,8 @@ class Grievances extends Component {
     e.preventDefault();
     const valid = this.validate();
     if (valid) {
+      const res=await instance.post("/add-grievances",{sap_id:this.state.sap,grievance:this.state.problem,description:this.state.description})
+      console.log(res);
       console.log('success');
       // var form = document.getElementById("myform");
       // form.reset();

@@ -71,6 +71,7 @@ module.exports = class Message{
             console.log(sql);
             let newMessage = await db.query(sql);
             console.log(newMessage);
+            var id =newMessage[0];
             // newMessage = await arrangeMessage(newMessage);
             return newMessage
         }else{

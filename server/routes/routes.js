@@ -41,6 +41,7 @@ router.post('/fetch-all-student',studentController.postFetchStudents);
 router.post('/find-student',studentController.postFetchBySapId);
 
 router.post('/add-grievances',grievanceController.postAddGrievance);
+router.post('/solved-grievances',grievanceController.postSolvedGrievances);
 router.post('/att-report',reportController.genReport);
 router.post('/postAttendance',attendanceController.postAttendance);
 

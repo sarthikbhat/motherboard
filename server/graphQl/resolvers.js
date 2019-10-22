@@ -10,6 +10,7 @@ const resolvers = {
     },
     Mutation:{
         addMessage: async(_,{group,sapId,message})=>{
+            console.log(group + sapId + message);
             let msg = await MessagesModel.addMessage({group,sapId,message});
             pubsub.publish('newMessage',{
                 newMessage:msg,

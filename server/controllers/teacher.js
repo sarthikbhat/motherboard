@@ -52,6 +52,8 @@ exports.postFetchBySapId = async (req, res, next) => {
 exports.postGenerateList = async (req, res, next) => {
   const semester = req.body.semester;
   const division = req.body.division;
+  console.log(semester);
+  console.log(division);
   // Teacher.GenerateList(semester,division,function(err,rows){
   //   if(err) throw err;
   //   res.render('take-attendance',{
@@ -59,5 +61,6 @@ exports.postGenerateList = async (req, res, next) => {
   //   })
   // });
   const rows = await Teacher.GenerateList(semester,division);
-  return res.satus(200).json({students:rows});
+  console.log(rows);
+  return res.status(200).json({students:rows});
 };

@@ -54,7 +54,7 @@ class Login extends Component {
     e.preventDefault();
     const valid = this.validate();
     if (valid) {
-      const res = await instance.post('users/login', {
+      const res = await instance.post('/login', {
         sap_id: this.state.name,
         password: this.state.pass
       });
@@ -67,7 +67,7 @@ class Login extends Component {
         // window.location.reload()
       } else {
         console.log('hayo rabba');
-        localStorage.setItem('mBKey', res.data.data.accessToken);
+        localStorage.setItem('mBKey', res.data.user.accessToken);
         window.location.href="/"
       }
       console.log('success');

@@ -10,7 +10,7 @@ var subjectValue='';
 export default class AttendanceAdd extends Component {
   constructor(props) {
     super(props);
-    this.state = { width: 0, height: 0, openContactBar: false ,subject:''};
+    this.state = { width: 0, height: 0, openContactBar: false ,subject:'',group:null };
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
 
@@ -43,16 +43,28 @@ export default class AttendanceAdd extends Component {
     this.setState({subject})
   };
 
+  getGroup = group => {
+    console.log(group)
+    this.setState({group})
+  };
+
   render() {
     var listStud = this.state.openContactBar ? 'listStud show' : 'listStud';
     return (
       <div id="chatBody">
         <div id="chatSect">
-          <AdderAttend subjectV={this.state.subject} />
+          {
+            this.state.group!=null?
+              <AdderAttend group={this.state.group} subjectV={this.state.subject} />
+              :
+              <div>
+                <h3>Please select any group first</h3>
+              </div>
+          }
           {console.log('hello')}
         </div>
         <div className={listStud}>
-          {this.state.openContactBar ? <AttendContact /> : null}
+          {this.state.openContactBar ? <AttendContact group={this.getGroup} subject={this.getSubject} /> : null}
           {this.state.width <= 600 ? (
             <button
               style={{
@@ -70,7 +82,7 @@ export default class AttendanceAdd extends Component {
               <Forum />
             </button>
           ) : (
-            <AttendContact subject={this.getSubject} />
+            <AttendContact group={this.getGroup} subject={this.getSubject} />
           )}
         </div>
         {this.state.openContactBar === true ? (

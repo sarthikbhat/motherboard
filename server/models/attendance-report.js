@@ -1,5 +1,5 @@
 const db = require('../util/database');
-
+const Sequelize = require('sequelize');
 module.exports = class Report{
     static async  getAttendance(){
         var sql = "SELECT *  FROM attendance  WHERE sap_id IN (SELECT sap_id FROM students)";

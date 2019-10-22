@@ -58,10 +58,10 @@ module.exports = class User {
         console.log(user);
         return user;
       }else{
-          throw "Password  doesn't match";
+          throw "Password";
       }
     }else{
-      throw "User doesn't exists."
+      throw "User"
     }
   }
   static async addOtp(sap_id,OTP){

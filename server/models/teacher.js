@@ -1,5 +1,5 @@
 const db = require('../util/database');
-
+const Sequelize = require('sequelize');
 module.exports = class Teacher {
   constructor(sap_id, designation,mentor,class_teacher,salary) {
     this.sap_id = parseInt(sap_id,10);
@@ -44,7 +44,7 @@ module.exports = class Teacher {
   
   static async GenerateList(semester,division){
     // db.query('SELECT sap_id,fname,lname FROM users WHERE sap_id IN (SELECT sap_id FROM students WHERE semester = '+db.escape(semester)+'AND division = '+ db.escape(division),callback);
-    let results = await db.query("SELECT sap_id,fname,lname FROM users WHERE sap_id IN (SELECT sap_id FROM students WHERE semester = "+db.escape(semester)+" AND division = "+db.escape(division)+")")
+    let results = await db.query("SELECT sap_id,fname,lname FROM users WHERE sap_id IN (SELECT sap_id FROM students WHERE semester = "+db.escape(semester)+" AND division = "+db.escape(division)+")",{ type: Sequelize.QueryTypes.SELECT })
     return results;
   }
 

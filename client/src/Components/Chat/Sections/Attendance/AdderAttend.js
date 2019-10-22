@@ -17,6 +17,16 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import AddIcon from '@material-ui/icons/Add';
 import Checkbox from '@material-ui/core/Checkbox';
+import { instance } from '../../../../App';
+
+const semMapping={
+  "SE-A":3,
+  "SE-B":3,
+  "TE-A":5,
+  "TE-B":5,
+  "BE-A":7,
+  "BE-B":7
+}
 
 const styles = Theme => ({
   root: {
@@ -70,7 +80,7 @@ const styles = Theme => ({
 
 class AdderAttend extends Component {
   state = {
-    
+    rows:[]
   };
 
   handleChange = name => event => {
@@ -81,6 +91,18 @@ class AdderAttend extends Component {
   createData = (sapid, fname, lname) => {
     return { sapid, fname, lname };
   };
+
+  componentDidMount=async()=>{
+    const res=await instance.post('/generate-list',{
+      semester:semMapping[this.props.group],
+      division:this.props.group.substring(3)
+    })
+    this.setState({
+      rows:res.data.students
+    })
+    console.log(res)
+  }
+
   render() {
     const { classes } = this.props;
 
@@ -112,14 +134,14 @@ class AdderAttend extends Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map(row => (
+              {this.state.rows.map(row => (
                 <TableRow key={row.name}>
                   <TableCell
                     className={classes.padding}
                     component="th"
                     scope="row"
                   >
-                    {row.sapid}
+                    {row.sap_id}
                   </TableCell>
                   <TableCell className={classes.padding}>
                     {row.fname}

@@ -1,5 +1,5 @@
 const db = require('../util/database');
-
+const Sequelize = require('sequelize');
 module.exports = class Attendance {
   constructor(sap_id,subject) {
     this.sap_id = parseInt(sap_id,10);

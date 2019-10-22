@@ -18,6 +18,7 @@ import Typography from '@material-ui/core/Typography';
 import AddIcon from '@material-ui/icons/Add';
 import Checkbox from '@material-ui/core/Checkbox';
 import { instance } from '../../../../App';
+import './AdderAttend.scss'
 
 const semMapping={
   "SE-A":3,
@@ -80,11 +81,18 @@ const styles = Theme => ({
 
 class AdderAttend extends Component {
   state = {
-    rows:[]
+    user:{},
+    rows:[],
+    loading:false
   };
 
   handleChange = name => event => {
-    this.setState({ [name]: event.target.checked });
+    const user=this.state.user.filter(elm=>{
+      return elm[name]==undefined
+    });
+    user.push({[name]:event.target.checked})
+    this.setState({ 
+      user: user },()=>{console.log(this.state)});
     console.log(this.props.subjectV);
   };
 
@@ -92,27 +100,54 @@ class AdderAttend extends Component {
     return { sapid, fname, lname };
   };
 
+  handleSubmitAttendance=async()=>{
+    console.log('button clicked')
+    const res=await instance.post('/postAttendance',{
+      att:this.state.user,
+      subject:this.props.subjectV
+    })
+    alert(res.data.message)
+    
+    console.log(res)
+  }
+
   componentDidMount=async()=>{
+    this.setState({loading:true})
     const res=await instance.post('/generate-list',{
       semester:semMapping[this.props.group],
       division:this.props.group.substring(3)
     })
+    var user=res.data.students.map(elm=>{
+      return {[elm.sap_id]:false}
+    })
     this.setState({
-      rows:res.data.students
+      loading:false,
+      rows:res.data.students,
+      user
     })
     console.log(res)
   }
 
+  componentWillReceiveProps=async(newProps)=>{
+    if(newProps.group!==this.props.group){
+      this.setState({loading:true})
+      const res=await instance.post('/generate-list',{
+        semester:semMapping[newProps.group],
+        division:newProps.group.substring(3)
+      })
+
+      this.setState({
+        loading:false,
+        rows:res.data.students
+      })
+      console.log(res)
+    }
+  }
+
   render() {
     const { classes } = this.props;
-
-    const rows = [
-      this.createData('60004170100', 'Sarthik', 'Bhat'),
-      this.createData('60004170101', 'Sanjay', 'Nayak'),
-      this.createData('60004170102', 'Samip', 'Kalyani'),
-      this.createData('60004170103', 'Vimal', 'Shah'),
-      this.createData('60004170104', 'Romil', 'Shah')
-    ];
+    console.log(this.props)
+    var isdisabled=(this.props.subjectV==""?"disabled":"")
     return (
       <React.Fragment>
         <div className="headers">
@@ -134,7 +169,9 @@ class AdderAttend extends Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {this.state.rows.map(row => (
+              {
+                !this.state.loading?
+                (this.state.rows.map(row => (
                 <TableRow key={row.name}>
                   <TableCell
                     className={classes.padding}
@@ -152,14 +189,19 @@ class AdderAttend extends Component {
                   <TableCell className={classes.padding}>
                     <Checkbox
                       //checked={this.state.checkedA}
-                      onChange={this.handleChange(row.sapid)}
+                      onChange={this.handleChange(row.sap_id)}
                       color="primary"
                     />
                   </TableCell>
                 </TableRow>
-              ))}
+              ))
+                ):(
+                  <h3>Loading....</h3>
+                )
+            }
             </TableBody>
           </Table>
+          <button className={"buttonAttendanceSubmit "+isdisabled} style={{margin:10}} disabled={this.props.subjectV==""} onClick={this.handleSubmitAttendance} >Submit</button>
         </div>
       </React.Fragment>
     );

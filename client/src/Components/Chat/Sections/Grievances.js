@@ -64,6 +64,17 @@ class Grievances extends Component {
     }
   };
 
+  sqlFile=()=>{
+    const url = 'http://samip.com/multipart';
+    const formData = new FormData();
+    formData.append('file',this.state.imagePreviewUrl)
+    const config = {
+        headers: {
+            'content-type': 'multipart/form-data'
+        }
+    }
+  }
+
   imgChange = e1 => {
     this.setState({
       img: e1.target.value,

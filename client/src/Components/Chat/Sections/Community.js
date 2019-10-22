@@ -10,7 +10,8 @@ class Community extends Component {
   constructor(props){
     super(props);
     this.state={
-      results:[]
+      results:[],
+      touched:false
     }
   }
 
@@ -21,7 +22,8 @@ class Community extends Component {
     })
     console.log(res)
     this.setState({
-      results:res.data.grievances
+      results:res.data.grievances,
+      touched:true
     },()=>{
       console.log(this.state)
     })
@@ -43,27 +45,27 @@ class Community extends Component {
               <Grid item xs={4} sm={4} md={4} style={{ height: '100%' }}></Grid>
             </Grid>
           </Grid>
-          {
-            this.state.results.map(elm=>{
-              return(
-                <Grid container spacing={32}>
+                <Grid container spacing={32} >
                   <Grid item xs={12}>
                     <Grid container spacing={32}>
-                      <Grid item xs={12} sm={12} md={12}>
+                    {
+            this.state.results.map(elm=>{
+              return(
+                      <Grid item xs={12} sm={12} md={12} style={{paddingBottom:'20px'}}>
                         <div className="details">
-                          <div className="headDet">Grievance: {elm.grievance}</div>
-                          <div className="det">Grievance ID: {elm.id}</div>
-                          <div className="det">Grievance Details: {elm.description}</div>
-                          <div className="det">Submission Date: recently</div>
+                          <div className="headDet"> <u>Grievance</u>: {elm.grievance}</div>
+                          <div className="det"> <u>Grievance ID</u>: {elm.id}</div>
+                          <div className="det"><u>Grievance Details</u>: {elm.description}</div>
+                          <div className="det"><u>Submission Date</u>: recently</div>
                           <div className="hover">Nothing to show</div>
                         </div>
                       </Grid>
+                         )
+            })
+          }
                     </Grid>
                   </Grid>
                 </Grid>
-              )
-            })
-          }
         </Grid>
       </div>
     );

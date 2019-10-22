@@ -3,6 +3,11 @@ import { Link } from 'react-router-dom';
 import './Navigator.scss';
 
 export default class Navigator extends Component {
+
+  logout=()=>{
+    localStorage.removeItem('mBKey');
+    window.location.href='/'
+  }
   render() {
     return (
       <React.Fragment>
@@ -29,6 +34,9 @@ export default class Navigator extends Component {
             <Link to="/attendanceadd" className="content" id="attendance">
               <h3>Attendance Add</h3>
             </Link>
+            <div className="content" id="log-out" onClick={this.logout}>
+              <h3>Log Out</h3>
+            </div>
           </div>
         </div>
       </React.Fragment>

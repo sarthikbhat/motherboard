@@ -33,8 +33,13 @@ export default class Header extends Component {
                 <div className="logoAligner" >
                     <div className="centralizer"></div>
                     <Link className="logo" to="/">mother<span>Board</span></Link>
-                    <div className="centralizer"></div>
+                    <div className="centralizer">
+                    <div className="left">Welcome Sarthik</div>
+                    </div>
                 </div>
+                {/* <div className="left">
+                <Link className="" to="/">mother<span>Board</span></Link>
+                </div> */}
             </div>
         )
     }

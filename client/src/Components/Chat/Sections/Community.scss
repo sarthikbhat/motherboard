@@ -48,20 +48,10 @@
   height: 100%;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.8);
+  // background-color: rgba(0, 0, 0, 0.8);
   display: none;
 }
 
-.dikha{
-  position: relative;
-}
-
-.details:hover {
-  .hover {
-    display: flex;
-  }
-  // background-color: rgba(0,0,0,0.8);
-}
 
 @media (max-width:950px){
 .outer{

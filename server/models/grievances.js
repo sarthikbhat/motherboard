@@ -25,6 +25,7 @@ module.exports = class Grievance {
     return results;
   }
   static async solvedGrievances(){
+    
     var sql = "SELECT *  FROM grievances WHERE isSolved = 1 ORDER BY id";
     console.log(sql);
     let results = await db.query(sql);

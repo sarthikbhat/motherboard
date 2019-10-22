@@ -1,12 +1,12 @@
 .header{
-    background: #FFFFFF 0% 0% no-repeat padding-box;
+    background: #878993 0% 0% no-repeat padding-box;
     padding:10px;
     padding-left:9px;
-    height:50px;
+    height:58px;
     overflow:hidden;
     display:flex;
     align-items: center;
-    border: 1px solid #707070;
+    // border: 1px solid #707070;
     border-bottom:none;
     border-bottom:none;
     .groups{
@@ -19,6 +19,11 @@
           font-weight: 400;
         }
       }
+    }
+
+    #groupOuterBox{
+        border: 1px solid #707070;
+        border-right:none;
     }
 
 #contactBar{

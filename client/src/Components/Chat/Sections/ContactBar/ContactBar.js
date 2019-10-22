@@ -40,19 +40,19 @@ export default function ContactBar() {
     };
     return (
         <React.Fragment>
+            <div id="groupOuterBox" style={{ height: window.innerHeight - 71 }}>
         <div className="header" >
             <div className="groups">
             <h3>GROUPS</h3>
             </div>
             </div>
-            <div id="groupOuterBox" style={{ height: window.innerHeight - 142 }} >
+            <div  >
                 <div id="contactBar">
                     <ExpansionPanel expanded={expanded === 'panel1'} onChange={handleChange('panel1')} id="expand">
                         <ExpansionPanelSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel1bh-content"
                         id="panel1bh-header"
-                        //style={{padding:"12px"}}
                         className={classes.maxheight}
                         >
                         <Typography className={classes.heading}>SE</Typography>
@@ -141,6 +141,7 @@ export default function ContactBar() {
                         </ExpansionPanelDetails>
                     </ExpansionPanel>
                 </div>
+            </div>
             </div>
         </React.Fragment>
         )

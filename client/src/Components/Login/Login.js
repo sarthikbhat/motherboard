@@ -68,7 +68,7 @@ class Login extends Component {
       } else {
         console.log('hayo rabba');
         localStorage.setItem('mBKey', res.data.data.accessToken);
-        window.location.reload()
+        window.location.href="/"
       }
       console.log('success');
       // var form = document.getElementById("myform");

@@ -46,6 +46,7 @@ module.exports = class Message{
     static async addMessage({group,sapId,message}){
         let sap_id=parseInt(sapId,10);
         let results = await User.findBysap_id(sapId);
+        console.log(results);
         console.log(results.length);
         if(results.length >0){
             var sql = "INSERT INTO messages(sap_id,body,grp) VALUES("+db.escape(sap_id)+","+db.escape(message)+","+db.escape(group)+")";

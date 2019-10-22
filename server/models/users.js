@@ -40,7 +40,7 @@ module.exports = class User {
   static async findBysap_id(sap_id) {
     var sql = "SELECT * FROM users WHERE sap_id = "+db.escape(sap_id);
     console.log(sql);
-    let results = await db.query(sql);
+    let results = await db.query(sql,{ type: Sequelize.QueryTypes.SELECT });
     return results;
   }
   

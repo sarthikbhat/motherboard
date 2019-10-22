@@ -16,7 +16,7 @@ class Community extends Component {
 
   componentDidMount=async()=>{
     const res=await instance.post('/solved-grievances',{
-      userType:"student",
+      userType:"teacher",
       sap_id:"100"
     })
     console.log(res)
@@ -45,7 +45,6 @@ class Community extends Component {
           </Grid>
           {
             this.state.results.map(elm=>{
-              elm=elm[0];
               return(
                 <Grid container spacing={32}>
                   <Grid item xs={12}>

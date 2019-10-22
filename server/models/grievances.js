@@ -1,5 +1,5 @@
 const db = require('../util/database');
-
+const Sequelize = require('sequelize');
 module.exports = class Grievance {
   constructor(sap_id, grievance,description) {
     this.sap_id = parseInt(sap_id,10);
@@ -27,14 +27,14 @@ module.exports = class Grievance {
   static async solvedGrievances(userType,sap_id){
     sap_id = parseInt(sap_id,10);
     if(userType == "teacher"){
-      var sql = "SELECT *  FROM grievances WHERE isSolved = 1 ORDER BY id";
+      var sql = "SELECT *  FROM grievances WHERE isSolved = 0 ORDER BY id";
       console.log(sql);
-      let results = await db.query(sql);
+      let results = await db.query(sql,{ type: Sequelize.QueryTypes.SELECT });
       return results;
     }else{
       var sql = "SELECT *  FROM grievances WHERE isSolved = 1 ORDER BY id ,  sap_id = "+db.escape(sap_id);
       console.log(sql);
-      let results = await db.query(sql);
+      let results = await db.query(sql,{ type: Sequelize.QueryTypes.SELECT });
       return results;
     } 
   }     

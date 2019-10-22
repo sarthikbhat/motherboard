@@ -30,6 +30,7 @@ exports.postPendingGrievances = async (req,res,next)=>{
 exports.postSolvedGrievances = async (req,res,next)=>{
     const { userType,sap_id } = req.body;
     const rows = await Grievance.solvedGrievances(userType,sap_id);
+    console.log(rows);
         // sending  the solved grievances
         return res.status(200).json({
             grievances:rows

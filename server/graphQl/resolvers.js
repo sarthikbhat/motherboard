@@ -16,12 +16,29 @@ const resolvers = {
                 group:group
             });
             return msg;
+        },
+
+        userTyping:async (_,{group,sapId})=>{
+          pubsub.publish("userTyping", { 
+            userTyping: sapId,
+            group:group 
+            });
+          return sapId;
         }
     },
     Subscription: {
         newMessage: {
           subscribe: withFilter(
             () => pubsub.asyncIterator('newMessage'),
+            (payload, variables) => {
+              return payload.group === variables.group;
+            }
+          )
+        },
+
+        userTyping: {
+          subscribe: withFilter(
+            () => pubsub.asyncIterator("userTyping"),
             (payload, variables) => {
               return payload.group === variables.group;
             }

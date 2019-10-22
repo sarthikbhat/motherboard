@@ -7,16 +7,18 @@ const typeDefs = gql `
     }
     type Subscription{
         newMessage(group: String!): Message
+        userTyping (group: String!): String
     }
 
     type Mutation{
         addMessage(group:String! sapId:String! message:String!):Message
-        createMessage(senderSapId: String! group: String! message: String! ): Message!
+        userTyping(group: String! sapId: String!):String!
     }
     type Message{
         body : String!
         group:String!
-        userId:String!
+        userName:String!
+        sapId:String!
     }
 `; 
 

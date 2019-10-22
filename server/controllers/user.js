@@ -53,9 +53,11 @@ exports.login = async (req,res)=>{
         // const sap_id = 100;
         // const password = "pass@123";
         const user = await User.authenticateUser(sap_id,password);
-        return res.status(500).json({ message:"Login Successfull"},user);
+        // return res.status(500).json({ message:"Login Successfull"},user);
+        return res.success("Login Successfully",user);
     }catch(e){
-        return res.status(500).json({ error : e});
+        // return res.status(500).json({ error : e});
+        return res.error(e);
     }
 };
 exports.sendOTP = async (req,res)=>{

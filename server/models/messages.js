@@ -3,7 +3,7 @@ const Sequelize = require('sequelize');
 const User = require('./users');
 
 
-async function arrangeMessage(message){
+async function arrangeMessage(msg){
     let newMessage = {
         body:msg.body,
         userName:msg.fname + ' ' + msg.lname,
@@ -50,10 +50,20 @@ module.exports = class Message{
         if(results.length >0){
             var sql = "INSERT INTO messages(sap_id,body,grp) VALUES("+db.escape(sap_id)+","+db.escape(message)+","+db.escape(group)+")";
             console.log(sql);
-            let newMessage = await db.query(sql);
-            console.log(newMessage);
-            // newMessage = await arrangeMessage(newMessage);
-            return newMessage
+            let result = await db.query(sql);
+            if(result[1]==1){
+                let messageId = result[0];
+
+                sql = "SELECT * FROM users NATURAL JOIN messages WHERE id = "+db.escape(messageId);
+                console.log(sql);
+                let [newMessage] = await db.query(sql,{type:Sequelize.QueryTypes.SELECT});
+                console.log(newMessage);
+                newMessage = await arrangeMessage(newMessage);
+                return newMessage
+            }else{
+                throw "Something Went Wrong"; 
+            }
+            
         }else{
             throw "User not found";
         }

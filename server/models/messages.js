@@ -65,12 +65,11 @@ module.exports = class Message{
         let sap_id=parseInt(sapId,10);
         let results = await User.findBysap_id(sapId);
         console.log(results.length);
-        if(results.length>0){
-            console.log("hjagdjgcjh");
-            var sql = "INSERT INTO messages (sap_id,body,grp) VALUES ("+db.escape(sap_id)+","+db.escape(body)+","+db.escape(group)+")";
+        if(results.length >0){
+            var sql = "INSERT INTO messages(sap_id,body,grp) VALUES("+db.escape(sapId)+","+db.escape(message)+","+db.escape(group)+")";
             console.log(sql);
             let newMessage = await db.query(sql);
-            console.log({newMessage});
+            console.log(newMessage);
             // newMessage = await arrangeMessage(newMessage);
             return newMessage
         }else{

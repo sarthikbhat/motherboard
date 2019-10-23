@@ -25,9 +25,13 @@ async function arrangeMessages(messages){
             createdAt:Date(msg.created_at)
         });
     });
-    msgs.sort(
-        (a,b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-        );    
+    // msgs.sort(
+    //     (a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    //     );  
+    // let sortFilter = {
+    //     createdAt: -1,
+    // };
+    // msgs.sort(sortFilter);  
     return msgs;
 }
 module.exports = class Message{
@@ -39,13 +43,20 @@ module.exports = class Message{
 
 
     static async getMessages({group,sapId}){
-        var sql = "SELECT * FROM users NATURAL JOIN messages WHERE sap_id = "+db.escape(sapId)+";";
-        console.log(sql);
-        let messages = await db.query(sql,{type:Sequelize.QueryTypes.SELECT});
-        console.log(messages);
+        let sql = "";
+        let messages ;
+        if(group && !sapId){
+            sql = "SELECT * FROM users NATURAL JOIN messages WHERE grp = "+db.escape(group)+";";
+            console.log(sql);
+            messages = await db.query(sql,{type:Sequelize.QueryTypes.SELECT});
+        }else {
+            sql = "SELECT * FROM users NATURAL JOIN messages WHERE sap_id = "+db.escape(sapId)+"AND grp = "+db.escape(group)+";";
+            console.log(sql);
+            messages = await db.query(sql,{type:Sequelize.QueryTypes.SELECT});
+        }
         console.log("Data Fetched Successfully!!");
         messages = await arrangeMessages(messages);
-        // console.log(messages);
+        console.log("Messages Arranged");
         return messages;
     }
 

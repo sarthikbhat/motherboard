@@ -15,8 +15,18 @@ const ADD_MESSAGE = gql`
   }
 `;
 
+const MESSAGE_QUERY=gql`
+query($sapId:String!,$group:String!){
+    messages(sapId:$sapId,group:$group){
+        body
+        userName
+        sapId
+        group
+    }
+  }`
+
 const MESSAGE_SUBSCRIPTION = gql`
-  subscription onNewMessage($group:String!){
+  query onNewMessage($group:String!){
       newMessage(group:$group){
           body
           group
@@ -25,6 +35,22 @@ const MESSAGE_SUBSCRIPTION = gql`
       }
   }
 `
+const unsubscribe=null
+
+const subsMessages = (group=this.props.groupName) => (
+    
+    <Subscription
+        subscription={MESSAGE_SUBSCRIPTION}
+        variables={{ group }}
+    >
+    {({ data, loading }) => (
+        !loading&&data.newMessage!=null?
+        <h4>{data.newMessage.body}{        console.log(data)
+        } </h4>
+        :null
+    )}
+    </Subscription>
+);
 
 
 
@@ -141,6 +167,7 @@ export default class ContactBar extends Component {
               }
           `}
             variables={{ group: this.props.groupName, sapId: "" }}
+            pollInterval={500}
         >
             {({ loading, error, data }) => {
                 var today = new Date()
@@ -150,7 +177,7 @@ export default class ContactBar extends Component {
                 if (error) return <p>Error :(</p>;
                 console.log(data)
                 return data.messages.map(({ body, sapId, userName }) => (
-                    userName == uName ?
+                    userName != uName ?
                         <div style={{ width: "100%", position: "relative", display: "flex", alignItems: "center" }} >
                             <div className="circleSender" >
                                 {userName.substring(0, 1)}{userName.split(" ")[1].substring(0, 1)}
@@ -163,7 +190,7 @@ export default class ContactBar extends Component {
                             </div>
                         </div>
                         :
-                        <div class="message received">
+                        <div class="message sent">
                             {body}
                             <span class="metadata" ><span class="time">{today.getHours()}:${today.getMinutes()}</span></span>
                         </div>
@@ -172,18 +199,19 @@ export default class ContactBar extends Component {
         </Query>
     );
 
-    subsMessages = () => (
-        <Subscription
-            subscription={MESSAGE_SUBSCRIPTION}
-            variables={{ group:this.props.groupName }}
-        >
-        {({ data, loading }) => (
-            !loading&&data.newMessage!=null?
-            <h4>{data.newMessage.body} </h4>
-            :null
-        )}
-        </Subscription>
-    );
+    // subsMessages = () => (
+    //     <Query
+    //         query={MESSAGE_SUBSCRIPTION}
+    //         pollInterval={1000}
+    //         variables={{ group:this.props.groupName }}
+    //     >
+    //     {({ data, loading }) => (
+    //         !loading&&data.newMessage!=null?
+    //         <h4>{data.newMessage.body} </h4>
+    //         :null
+    //     )}
+    //     </Query>
+    // );
 
     render() {
         console.log(this.props)
@@ -209,7 +237,6 @@ export default class ContactBar extends Component {
                         </div>
                     </div>
                     {this.addMessages(sapId)}
-                    {this.subsMessages()}
                 </React.Fragment>
             ) :
                 (

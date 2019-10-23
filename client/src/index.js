@@ -9,8 +9,30 @@ import App from './App';
 import configureStore from "./reduxStates/store";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
+import { WebSocketLink } from 'apollo-link-ws';
 
 
+// const wsLink = new WebSocketLink({
+//   uri: `ws://localhost:5000/`,
+//   options: {
+//     reconnect: true
+//   }
+// });
+// const httpLink = new HttpLink({
+//   uri: 'http://localhost:3000/graphql'
+// });
+// const link = split(
+//   // split based on operation type
+//   ({ query }) => {
+//     const definition = getMainDefinition(query);
+//     return (
+//       definition.kind === 'OperationDefinition' &&
+//       definition.operation === 'subscription'
+//     );
+//   },
+//   wsLink,
+//   httpLink,
+// );
 const client = new ApolloClient({
   uri: "http://localhost:5000/graphQl"
 });

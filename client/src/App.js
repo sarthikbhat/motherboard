@@ -13,6 +13,7 @@ import Notes from './Components/Chat/Sections/Notes';
 import AttendanceReport from './Components/Chat/Sections/AttendanceReport';
 import AttendanceAdd from './Components/Chat/Sections/AttendanceAdd';
 
+
 export const instance = axios.create({
   baseURL: 'http://localhost:5000/',
 });

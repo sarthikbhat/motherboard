@@ -52,6 +52,8 @@ exports.login = async (req,res)=>{
         const password = req.body.password;
         // const sap_id = 100;
         // const password = "pass@123";
+        console.log(sap_id);
+        console.log(password);
         const user = await User.authenticateUser(sap_id,password);
         console.log(user);
         return res.status(200).json({ message:"Login Successfull" , user});

@@ -2,7 +2,7 @@ const {gql} = require('apollo-server-express');
 
 const typeDefs = gql `
     type Query{
-        messages(group:String! sapId:String!):[Message]
+        messages(group:String sapId:String!):[Message]
 
     }
     type Subscription{

@@ -13,7 +13,7 @@ import Layout from '../Layout/Layout'
 export default class Chat extends Component {
   constructor(props) {
     super(props);
-    this.state = { width: 0, height: 0, openContactBar: false };
+    this.state = { width: 0, height: 0, openContactBar: false, groupName:"" };
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
 
@@ -41,15 +41,22 @@ export default class Chat extends Component {
       }
     );
   };
+
+  handleGroup=(groupName)=>{
+    this.setState({
+      groupName
+    })
+  }
+
   render() {
     var listStud = this.state.openContactBar ? 'listStud show' : 'listStud';
     return (
       <div id="chatBody">
         <div id="chatSect">
-          <ChatBar/>
+          <ChatBar groupName={this.state.groupName} />
         </div>
         <div className={listStud}>
-          {this.state.openContactBar ? <ContactBar /> : null}
+          {this.state.openContactBar ? <ContactBar handleGroup={this.handleGroup} /> : null}
           {this.state.width <= 600 ? (
             <button
               style={{
@@ -67,7 +74,7 @@ export default class Chat extends Component {
               <Forum />
             </button>
           ) : (
-            <ContactBar />
+            <ContactBar handleGroup={this.handleGroup} />
           )}
         </div>
         {this.state.openContactBar === true ? (

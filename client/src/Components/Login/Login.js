@@ -67,7 +67,9 @@ class Login extends Component {
         // window.location.reload()
       } else {
         console.log('hayo rabba');
-        localStorage.setItem('mBKey', res.data.user.accessToken);
+        localStorage.setItem('mBKey', res.data.data.accessToken);
+        localStorage.setItem('mBsap', res.data.data.sap_id);
+        localStorage.setItem('mBname', res.data.data.fname+" "+ res.data.data.lname);
         window.location.href="/"
       }
       console.log('success');

@@ -31,13 +31,18 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-export default function ContactBar() {
+export default function ContactBar(props) {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
 
     const handleChange = panel => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
     };
+
+    const handleGroup=(val)=>{
+        props.handleGroup(val)
+    }
+
     return (
         <React.Fragment>
             <div id="groupOuterBox" style={{ height: window.innerHeight - 71 }}>
@@ -58,7 +63,7 @@ export default function ContactBar() {
                         <Typography className={classes.heading}>SE</Typography>
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails className={classes.paddingfix}>
-                            <div className="a">
+                            <div className="a" onClick={()=>{handleGroup("SE-A")}} >
                             <div className="avatar" >
                                 <h3>SE-A</h3>
                             </div>
@@ -68,7 +73,7 @@ export default function ContactBar() {
                             </div>
                             </ExpansionPanelDetails>
                             <ExpansionPanelDetails className={classes.paddingfix}>
-                            <div className="b">
+                            <div className="b" onClick={()=>{handleGroup("SE-B")}} >
                             <div className="avatar" >
                                 <h3>SE-B</h3>
                             </div>
@@ -89,7 +94,7 @@ export default function ContactBar() {
                         <Typography className={classes.heading}>TE</Typography>
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails className={classes.paddingfix}>
-                            <div className="a">
+                            <div className="a" onClick={()=>{handleGroup("TE-A")}} >
                             <div className="avatar" >
                                 <h3>TE-A</h3>
                             </div>
@@ -99,7 +104,7 @@ export default function ContactBar() {
                             </div>
                             </ExpansionPanelDetails>
                             <ExpansionPanelDetails className={classes.paddingfix}>
-                            <div className="b">
+                            <div className="b" onClick={()=>{handleGroup("TE-B")}} >
                             <div className="avatar" >
                                 <h3>TE-B</h3>
                             </div>
@@ -120,7 +125,7 @@ export default function ContactBar() {
                         <Typography className={classes.heading}>BE</Typography>
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails className={classes.paddingfix}>
-                            <div className="a">
+                            <div className="a" onClick={()=>{handleGroup("BE-A")}} >
                             <div className="avatar" >
                                 <h3>BE-A</h3>
                             </div>
@@ -130,7 +135,7 @@ export default function ContactBar() {
                             </div>
                             </ExpansionPanelDetails>
                             <ExpansionPanelDetails className={classes.paddingfix}>
-                            <div className="b">
+                            <div className="b" onClick={()=>{handleGroup("TE-B")}} >
                             <div className="avatar" >
                                 <h3>BE-B</h3>
                             </div>

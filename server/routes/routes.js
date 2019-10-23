@@ -9,7 +9,7 @@ const attendanceController = require('../controllers/attendance');
 const UserController = require('../controllers/user');
 const {verify} = require('../auth/auth');
 const router = express.Router();
-
+const upload = require('../config/multer');
 router.get('/',(req,res)=>{
     res.render('index');
 });
@@ -40,7 +40,10 @@ router.post('/delete-student', studentController.postDeleteStudent);
 router.post('/fetch-all-student',studentController.postFetchStudents);
 router.post('/find-student',studentController.postFetchBySapId);
 
-router.post('/add-grievances',grievanceController.postAddGrievance);
+router.post('/add-grievances',
+            upload.single('image'),
+            grievanceController.postAddGrievance
+            );
 router.post('/solved-grievances',grievanceController.postSolvedGrievances);
 router.post('/att-report',reportController.genReport);
 router.post('/postAttendance',attendanceController.postAttendance);

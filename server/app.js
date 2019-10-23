@@ -3,7 +3,6 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const multer = require('multer');
 const {Response} = require('./models/response');
 
 const Routes = require('./routes/routes')
@@ -22,24 +21,7 @@ const port = 5000;
 // const port = 3000;
 
 const app = express();
-const fileStorage = multer.diskStorage({
-    destination: (req,file,cb)=>{
-      cb(null,'images');
-    },
-    filename: (req,file,cb)=>{
-      cb(null, new Date().toISOString() + '-' + file.originalname);
-    }
-});
-  
-const Filefilter = (req,file,cb)=>{
-    if (file.mimetype === "image/png" ||file.mimetype === "image/jpg" ||file.mimetype === "image/jpeg"  )
-    {
-        cb(null,true);
-    }
-    else{
-        cb(null,false);
-    }
-};
+
 
 app.use(cors());
 
@@ -63,10 +45,9 @@ graphQlServer.installSubscriptionHandlers(httpServer);
 
 
 app.use(bodyParser.json());
-app.use(multer({storage:fileStorage,fileFilter: Filefilter}).single('image'));
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/images', express.static(path.join(__dirname, 'images')));
+// app.use('/images', express.static(path.join(__dirname, 'images')));
 
 app.use(Routes);
 

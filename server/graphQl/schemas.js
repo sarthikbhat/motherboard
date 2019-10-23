@@ -19,6 +19,7 @@ const typeDefs = gql `
         group:String!
         userName:String!
         sapId:String!
+        createdAt:String!
     }
 `; 
 

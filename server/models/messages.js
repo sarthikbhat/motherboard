@@ -8,9 +8,9 @@ async function arrangeMessage(msg){
         body:msg.body,
         userName:msg.fname + ' ' + msg.lname,
         sapId:msg.sap_id,
-        group : msg.grp
+        group : msg.grp,
+        createdAt:Date(msg.created_at)
     }
-
     return newMessage
 }
 
@@ -21,9 +21,13 @@ async function arrangeMessages(messages){
             body:msg.body,
             userName:msg.fname + ' ' + msg.lname,
             sapId:msg.sap_id,
-            group : msg.grp
+            group : msg.grp,
+            createdAt:Date(msg.created_at)
         });
     });
+    msgs.sort(
+        (a,b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+        );    
     return msgs;
 }
 module.exports = class Message{
@@ -38,8 +42,10 @@ module.exports = class Message{
         var sql = "SELECT * FROM users NATURAL JOIN messages WHERE sap_id = "+db.escape(sapId)+";";
         console.log(sql);
         let messages = await db.query(sql,{type:Sequelize.QueryTypes.SELECT});
+        console.log(messages);
         console.log("Data Fetched Successfully!!");
         messages = await arrangeMessages(messages);
+        // console.log(messages);
         return messages;
     }
 

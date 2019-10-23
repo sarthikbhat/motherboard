@@ -34,7 +34,7 @@ export default class Header extends Component {
                     <div className="centralizer"></div>
                     <Link className="logo" to="/">mother<span>Board</span></Link>
                     <div className="centralizer">
-                    <div className="left">Welcome Sarthik</div>
+                    <div className="left">Welcome {localStorage.getItem('mBname').split(' ')[0]}</div>
                     </div>
                 </div>
                 {/* <div className="left">

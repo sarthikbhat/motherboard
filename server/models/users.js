@@ -40,7 +40,7 @@ module.exports = class User {
   static async findBysap_id(sap_id) {
     var sql = "SELECT * FROM users WHERE sap_id = "+db.escape(sap_id);
     console.log(sql);
-    let results = await db.query(sql);
+    let results = await db.query(sql,{type:Sequelize.QueryTypes.SELECT});
     return results;
   }
   
@@ -67,19 +67,22 @@ module.exports = class User {
   static async addOtp(sap_id,OTP){
     var sql = "UPDATE users SET otp = "+db.escape(OTP)+", otpVerified = 0 WHERE sap_id = "+db.escape(sap_id);
     console.log(sql)
-    let results = await db.query(sql,{ type: Sequelize.QueryTypes.SELECT });
+    let results = await db.query(sql);
+    console.log("otp updated");
     return results;
   }
   static async verifyOTP(sap_id,OTP){
     var sql = "SELECT * FROM users WHERE sap_id = "+db.escape(sap_id);
     console.log(sql);
     let results = await db.query(sql,{ type: Sequelize.QueryTypes.SELECT });
-    if(results.length>0){
+    console.log(results);
+    if(results.length >0){
       const user = results[0];
-      if(user.otp===parseInt(OTP)){
+      if(user.otp=OTP){
         var sql2 = "UPDATE users SET otpVerified = 1 WHERE sap_id = "+db.escape(sap_id);
         console.log(sql2);
-        await db.query(sql2,{ type: Sequelize.QueryTypes.SELECT });
+        await db.query(sql2);
+        console.log("otpVerified updated");
         return true;
       }else{
           return false;

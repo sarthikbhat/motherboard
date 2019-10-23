@@ -240,7 +240,7 @@ export default function Forgot() {
         const valid = validate();
         if (valid) {
             console.log("success");
-            var res = await instance.post('/users/password/change',{
+            var res = await instance.post('/password/change',{
                 password:pwd,
                 confirmPassword:cnfpwd,
                 sapId:sap
@@ -310,13 +310,13 @@ export default function Forgot() {
             console.log("successful");
         }
         if (ovalid == false && rvalid == true) {
-            instance.post('/users/send/otp', { sap_id: sap, email: click1, phoneNo: click2 })
+            instance.post('/send/otp', { sap_id: sap, email: click1, phoneNo: click2 })
                 .then(res => {
                     console.log(res);
                 })
         }
         else if (ovalid == true) {
-            instance.post('/users/otp/verify', {
+            instance.post('/otp/verify', {
                 sap_id: sap,
                 otp: otp
             })
@@ -331,7 +331,7 @@ export default function Forgot() {
     }
 
     const varifyOTP = async () => {
-        var res = await instance.post('/users/otp/verify', {
+        var res = await instance.post('/otp/verify', {
             sap_id: sap,
             otp: otp
         })

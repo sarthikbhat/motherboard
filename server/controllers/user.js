@@ -10,15 +10,18 @@ async function generateOTP() {
     return OTP;
 } 
 async function sendOTPviaEmail(sap_id){
+    sap_id = parseInt(sap_id,10);
     let user = await User.findBysap_id(sap_id);
+    console.log(user);
     if(user.length > 0 ){
         let OTP = await generateOTP();
+        OTP = parseInt(OTP,10);
         console.log("OTP>>",OTP);
         let msgDetails = {
             otp:OTP,
-            toEmail:user.email,
+            toEmail:user[0].email,
         }
-        await User.addOtp(user.sap_id,OTP);
+        await User.addOtp(sap_id,OTP);
         let result = await sendEmail(msgDetails);
         if(result){
             return true;
@@ -30,6 +33,7 @@ async function sendOTPviaEmail(sap_id){
     }
 }
 async function sendOTPviaPhoneNo(sap_id){
+    sap_id = parseInt(sap_id,10);
     let users = await User.findBysap_id(sap_id);
     if(users.length > 0 ){
         var user = users[0];
@@ -73,15 +77,20 @@ exports.sendOTP = async (req,res)=>{
 };
 exports.verifyOTP = async (req,res)=>{
     try{
-        const {sap_id,otp} = req.body;
+        let {sap_id,otp} = req.body;
+        sap_id = parseInt(sap_id,10);
+        otp = parseInt(otp,10);
         let result = await User.verifyOTP(sap_id,otp);
         if(result){
             return res.success("OTP Verified!!");
+            // return res.status(200).json({message:"OTP Verified!!"});
         }else{
             throw "Cant verify otp";
         }
-    }catch(e){
-        return res.status(500).json({error:err})
+    }catch(err){
+        // return res.status(500).json({error:err})
+        console.log(err);
+        return res.error(err);
     }
 };
 exports.changePassword = async (req,res)=>{

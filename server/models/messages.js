@@ -22,7 +22,7 @@ async function arrangeMessages(messages){
     messages.sort(function(a, b) {
         a = new Date(a.created_at);
         b = new Date(b.created_at);
-        return a>b ? -1 : a<b ? 1 : 0;
+        return a>b ? 1 : a<b ? -1 : 0;
     });
     messages.forEach(msg=>{
         msgs.push({

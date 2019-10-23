@@ -47,9 +47,9 @@ export default function AttendContact(props) {
     props.subject(event.target.value);
   };
 
-  const handleGroup=(grpName)=>{
-    props.group(grpName)
-  }
+  const handleGroup = grpName => {
+    props.group(grpName);
+  };
 
   const handleChange = panel => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -106,7 +106,12 @@ export default function AttendContact(props) {
                 <Typography className={classes.heading}>SE</Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails className={classes.paddingfix}>
-                <div onClick={()=>{handleGroup("SE-A")}} className="a">
+                <div
+                  onClick={() => {
+                    handleGroup('SE-A');
+                  }}
+                  className="a"
+                >
                   <div className="avatar">
                     <h3>SE-A</h3>
                   </div>
@@ -116,7 +121,12 @@ export default function AttendContact(props) {
                 </div>
               </ExpansionPanelDetails>
               <ExpansionPanelDetails className={classes.paddingfix}>
-                <div onClick={()=>{handleGroup("SE-B")}} className="b">
+                <div
+                  onClick={() => {
+                    handleGroup('SE-B');
+                  }}
+                  className="b"
+                >
                   <div className="avatar">
                     <h3>SE-B</h3>
                   </div>
@@ -141,7 +151,12 @@ export default function AttendContact(props) {
                 <Typography className={classes.heading}>TE</Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails className={classes.paddingfix}>
-                <div onClick={()=>{handleGroup("TE-A")}} className="a">
+                <div
+                  onClick={() => {
+                    handleGroup('TE-A');
+                  }}
+                  className="a"
+                >
                   <div className="avatar">
                     <h3>TE-A</h3>
                   </div>
@@ -151,7 +166,12 @@ export default function AttendContact(props) {
                 </div>
               </ExpansionPanelDetails>
               <ExpansionPanelDetails className={classes.paddingfix}>
-                <div onClick={()=>{handleGroup("TE-B")}} className="b">
+                <div
+                  onClick={() => {
+                    handleGroup('TE-B');
+                  }}
+                  className="b"
+                >
                   <div className="avatar">
                     <h3>TE-B</h3>
                   </div>
@@ -176,7 +196,12 @@ export default function AttendContact(props) {
                 <Typography className={classes.heading}>BE</Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails className={classes.paddingfix}>
-                <div onClick={()=>{handleGroup("BE-A")}} className="a">
+                <div
+                  onClick={() => {
+                    handleGroup('BE-A');
+                  }}
+                  className="a"
+                >
                   <div className="avatar">
                     <h3>BE-A</h3>
                   </div>
@@ -186,7 +211,12 @@ export default function AttendContact(props) {
                 </div>
               </ExpansionPanelDetails>
               <ExpansionPanelDetails className={classes.paddingfix}>
-                <div onClick={()=>{handleGroup("BE-B")}} className="b">
+                <div
+                  onClick={() => {
+                    handleGroup('BE-B');
+                  }}
+                  className="b"
+                >
                   <div className="avatar">
                     <h3>BE-B</h3>
                   </div>

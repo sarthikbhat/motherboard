@@ -4,30 +4,36 @@ const User = require('./users');
 
 
 async function arrangeMessage(msg){
+
     let newMessage = {
         body:msg.body,
         userName:msg.fname + ' ' + msg.lname,
         sapId:msg.sap_id,
         group : msg.grp,
-        createdAt:Date(msg.created_at)
+        createdAt:String(msg.created_at)
     }
     return newMessage
 }
 
 async function arrangeMessages(messages){
     let msgs = [];
+
+    //sorting Messages by date.
+    messages.sort(function(a, b) {
+        a = new Date(a.created_at);
+        b = new Date(b.created_at);
+        return a>b ? -1 : a<b ? 1 : 0;
+    });
     messages.forEach(msg=>{
         msgs.push({
             body:msg.body,
             userName:msg.fname + ' ' + msg.lname,
             sapId:msg.sap_id,
             group : msg.grp,
-            createdAt:Date(msg.created_at)
+            createdAt:String(msg.created_at)
         });
     });
-    msgs.sort(
-        (a,b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-        );    
+       
     return msgs;
 }
 module.exports = class Message{
@@ -39,7 +45,7 @@ module.exports = class Message{
 
 
     static async getMessages({group,sapId}){
-        var sql = "SELECT * FROM users NATURAL JOIN messages WHERE sap_id = "+db.escape(sapId)+";";
+        var sql = "SELECT * FROM users NATURAL JOIN messages WHERE sap_id = "+db.escape(sapId)+"AND grp = "+db.escape(group);
         console.log(sql);
         let messages = await db.query(sql,{type:Sequelize.QueryTypes.SELECT});
         console.log(messages);
